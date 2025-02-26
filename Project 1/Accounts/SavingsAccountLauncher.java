@@ -22,7 +22,4 @@ public class SavingsAccountLauncher {
     }
 }
 
-// Assuming SavingsAccount class exists
-class SavingsAccount {
-    // Implementation of SavingsAccount class
-}
+

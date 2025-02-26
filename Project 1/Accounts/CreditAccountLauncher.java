@@ -17,8 +17,3 @@ public class CreditAccountLauncher {
         return new CreditAccount();
     }
 }
-
-// Assuming CreditAccount class exists
-class CreditAccount {
-    // Implementation of CreditAccount class
-}
