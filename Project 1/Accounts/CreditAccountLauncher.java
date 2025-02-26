@@ -1,19 +1,72 @@
-public class CreditAccountLauncher {
-    
-    public void creditAccountInit() {
-        // Implementation for initializing a credit account
+package Accounts;
+
+public class CreditAccountLauncher extends AccountLauncher {
+    /**
+     * Constructor for CreditAccountLauncher.
+     *
+     * @param bank The bank associated with this launcher.
+     */
+    public CreditAccountLauncher(Bank bank) {
+        super(bank);
     }
 
-    private void creditPaymentProcess() {
-        // Implementation for credit payment process
+
+    /**
+     * Handles the deposit process for a credit account.
+     *
+     * @param amount The amount to deposit.
+     * @param account The credit account to receive the deposit.
+     */
+    public void depositProcess(double amount, Account account) {
+        // Implementation pending
     }
 
-    private void creditRecompenseProcess() {
-        // Implementation for credit recompense process
+    /**
+     * Handles the withdrawal process for a credit account.
+     *
+     * @param amount The amount to withdraw.
+     * @param account The credit account from which to withdraw.
+     */
+    public void withdrawProcess(double amount, Account account) {
+        // Implementation pending
     }
 
-    protected CreditAccount getLoggedAccount() {
-        // Implementation for getting logged-in credit account
-        return new CreditAccount();
+    /**
+     * Processes loan repayments for a credit account.
+     *
+     * @param amount The repayment amount.
+     * @param account The credit account making the repayment.
+     */
+    public void creditRepaymentProcess(double amount, Account account) {
+        // Implementation pending
+    }
+        @Override
+    public Account getLoggedAccount() {
+        return null;
+    }
+
+    @Override
+    public void setBank(Bank bank) {
+
+    }
+
+    @Override
+    public Bank getBank() {
+        return null;
+    }
+
+    @Override
+    public boolean isLogged() {
+        return false;
+    }
+
+    @Override
+    public void setAccount(Account account) {
+
+    }
+
+    @Override
+    public boolean checkCredentials(String accountNumber, String pin) {
+        return false;
     }
 }
