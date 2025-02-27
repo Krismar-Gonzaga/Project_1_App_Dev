@@ -1,4 +1,4 @@
-class CreditAccount extends Account {
+public class CreditAccount extends Account {
     private double loan;
 
     // Constructor

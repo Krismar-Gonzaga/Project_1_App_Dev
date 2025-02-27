@@ -1,4 +1,4 @@
-class SavingsAccount extends Account {
+public class SavingsAccount extends Account {
     private double balance;
 
     // Constructor

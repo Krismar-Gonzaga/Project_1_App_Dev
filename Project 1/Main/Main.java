@@ -35,6 +35,10 @@ public class Main
                 setOption();
                 showMenu(getOption(), 1);
                 // TODO: Complete this portion
+
+                if (getOption() == 1){
+                    
+                }
             }
             // Bank Option
             else if (getOption() == 2)

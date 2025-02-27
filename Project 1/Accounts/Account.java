@@ -1,9 +1,11 @@
+package Accounts;
+
 import java.util.ArrayList;
 
 // Abstract class Account
 public abstract class Account {
     // Attributes
-    private Bank BAND;
+    private Bank BANK;
     private String ACCOUNTNUMBER;
     private String OWNERFNAME;
     private String OWNERLNAME;
@@ -13,13 +15,67 @@ public abstract class Account {
 
     // Constructor
     public Account(Bank BANK, String ACCOUNTNUMBER, String OWNERFNAME, String OWNERLNAME, String OWNEREMAIL, String pin) {
-        this.BAND = BANK;
+        this.BANK = BANK;
         this.ACCOUNTNUMBER = ACCOUNTNUMBER;
         this.OWNERFNAME = OWNERFNAME;
         this.OWNERLNAME = OWNERLNAME;
         this.OWNEREMAIL = OWNEREMAIL;
         this.pin = pin;
         this.TRANSACTION = new ArrayList<>();
+    }
+
+    // Getters
+    public Bank getBank() {
+        return BANK;
+    }
+
+    public String getAccountNumber() {
+        return ACCOUNTNUMBER;
+    }
+
+    public String getOwnerFirstName() {
+        return OWNERFNAME;
+    }
+
+    public String getOwnerLastName() {
+        return OWNERLNAME;
+    }
+
+    public String getOwnerEmail() {
+        return OWNEREMAIL;
+    }
+
+    public String getPin() {
+        return pin;
+    }
+
+    public ArrayList<Transaction> getTransactions() {
+        return TRANSACTION;
+    }
+
+    // Setters
+    public void setBank(Bank BANK) {
+        this.BANK = BANK;
+    }
+
+    public void setAccountNumber(String ACCOUNTNUMBER) {
+        this.ACCOUNTNUMBER = ACCOUNTNUMBER;
+    }
+
+    public void setOwnerFirstName(String OWNERFNAME) {
+        this.OWNERFNAME = OWNERFNAME;
+    }
+
+    public void setOwnerLastName(String OWNERLNAME) {
+        this.OWNERLNAME = OWNERLNAME;
+    }
+
+    public void setOwnerEmail(String OWNEREMAIL) {
+        this.OWNEREMAIL = OWNEREMAIL;
+    }
+
+    public void setPin(String pin) {
+        this.pin = pin;
     }
 
     // Method to get owner's full name
