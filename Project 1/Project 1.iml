@@ -3,9 +3,11 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/Accounts" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Bank" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Project_1_App_Dev" />
   </component>
 </module>

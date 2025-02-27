@@ -29,8 +29,12 @@ public class Bank {
      * @param accountType The class type of the accounts to be displayed (e.g., SavingsAccount.class).
      * @param <T> The generic type representing the account type.
      */
-    public <T> void showAccounts(class <T> accountType){
-        //logics here
+    public <T> void showAccounts(Class<T> accountType) {
+        for (Account account : BANKACCOUNTS) {
+            if (accountType.isInstance(account)) {
+                System.out.println(account.toString());
+            }
+        }
     }
 
     /*
@@ -41,8 +45,13 @@ public class Bank {
      * @return The account with the specified account number.
      */
 
-    public Account getBankAccount(Bank bank, String AccountNum){
-        return null; // temporary
+    public Account getBankAccount(Bank bank, String accountNum) {
+        for (Account account : bank.BANKACCOUNTS) {
+            if (account.getAccountNumber().equals(accountNum)) {
+                return account;
+            }
+        }
+        return null;
     }
 
     public ArrayList<String> createNewAccount(){
