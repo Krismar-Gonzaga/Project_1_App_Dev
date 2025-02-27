@@ -1,4 +1,6 @@
-class SavingsAccount extends Account {
+package Accounts;
+
+public class SavingsAccount extends Account {
     private double balance;
 
     // Constructor
