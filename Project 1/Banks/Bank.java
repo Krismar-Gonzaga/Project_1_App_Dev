@@ -1,14 +1,16 @@
+package Banks;
+
 import java.util.*;
 
-import Accounts.Account;
+import Accounts.*;
 
 public class Bank {
     private int ID;
     private String name, passcode;
-    private double DEPOSITLIMIT;
-    private double WITHDRAWLIMIT;
-    private double CREDITLIMIT;
-    private double processingFee;
+    private double DEPOSITLIMIT = 50000.0;
+    private double WITHDRAWLIMIT = 50000.0;
+    private double CREDITLIMIT = 100000.0;
+    private double processingFee = 10.0;
     private final ArrayList<Account> BANKACCOUNTS;
 
     public Bank(int ID, String name, String passcode) {
@@ -74,13 +76,30 @@ public class Bank {
 
         return newAccount;
     }
+    /*
+     * Creates a new credit account and adds it to the bank.
+     * @return The newly created credit account.
+     */
 
-    public CreditAccount createNewCrediAccount(){
-        return null; //temporary
+    public CreditAccount createNewCreditAccount(){
+        ArrayList<String> newAccount = createNewAccount();
+        CreditAccount newCreditAccount = new CreditAccount(this, newAccount.get(0), newAccount.get(1),
+                                                           newAccount.get(2), newAccount.get(3),
+                                                           newAccount.get(4), 0.0);
+        BANKACCOUNTS.add(newCreditAccount);
+        return newCreditAccount;
     }
-
-    public SavingsAccount createNewSavingAccount(){
-        return null;
+    /*
+     * Creates a new savings account and adds it to the bank.
+     * @return The newly created savings account.
+     */
+    public SavingsAccount createNewSavingsAccount(){
+        ArrayList<String> userInfo = createNewAccount();
+        SavingsAccount newSavingsAccount = new SavingsAccount(this, userInfo.get(0), userInfo.get(1),
+                                                              userInfo.get(2), userInfo.get(3), 
+                                                              userInfo.get(4), 0.0);
+        BANKACCOUNTS.add(newSavingsAccount);
+        return newSavingsAccount;
     }
 
     public void addNewAccount(Account account){
