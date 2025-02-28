@@ -1,5 +1,7 @@
 import java.util.*;
 
+import Accounts.Account;
+
 public class Bank {
     private int ID;
     private String name, passcode;
@@ -46,7 +48,31 @@ public class Bank {
     }
 
     public ArrayList<String> createNewAccount(){
-        return null; //temporary
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<String> newAccount = new ArrayList<>();
+
+        System.out.print("Enter First Name: ");
+        String Fname = scanner.nextLine();
+
+        System.out.print("Enter Last Name: ");
+        String Lname = scanner.nextLine();
+
+        System.out.print("Enter Email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Enter 4-digit PIN: ");
+        String pin = scanner.nextLine();
+
+        System.out.print("Enter Account Number: ");
+        String accountNumber = scanner.nextLine();
+
+        newAccount.add(accountNumber);
+        newAccount.add(Fname);
+        newAccount.add(Lname);
+        newAccount.add(email);
+        newAccount.add(pin);
+
+        return newAccount;
     }
 
     public CreditAccount createNewCrediAccount(){
