@@ -1,4 +1,5 @@
 package Accounts;
+import Banks.Bank;
 
 public class CreditAccount extends Account {
     private double loan;

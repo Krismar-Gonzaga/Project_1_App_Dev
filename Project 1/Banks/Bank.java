@@ -83,9 +83,13 @@ public class Bank {
 
     public CreditAccount createNewCreditAccount(){
         ArrayList<String> newAccount = createNewAccount();
-        CreditAccount newCreditAccount = new CreditAccount(this, newAccount.get(0), newAccount.get(1),
-                                                           newAccount.get(2), newAccount.get(3),
-                                                           newAccount.get(4), 0.0);
+        String accountNumber = newAccount.get(0);
+        String Fname = newAccount.get(1);
+        String Lname = newAccount.get(2);
+        String email = newAccount.get(3);
+        String pin = newAccount.get(4);
+
+        CreditAccount newCreditAccount = new CreditAccount(this, accountNumber, Fname, Lname, email, pin, 0.0);
         BANKACCOUNTS.add(newCreditAccount);
         return newCreditAccount;
     }
@@ -94,10 +98,13 @@ public class Bank {
      * @return The newly created savings account.
      */
     public SavingsAccount createNewSavingsAccount(){
-        ArrayList<String> userInfo = createNewAccount();
-        SavingsAccount newSavingsAccount = new SavingsAccount(this, userInfo.get(0), userInfo.get(1),
-                                                              userInfo.get(2), userInfo.get(3), 
-                                                              userInfo.get(4), 0.0);
+        ArrayList<String> newAccount = createNewAccount();
+        String accountNumber = newAccount.get(0);
+        String Fname = newAccount.get(1);
+        String Lname = newAccount.get(2);
+        String email = newAccount.get(3);
+        String pin = newAccount.get(4);
+        SavingsAccount newSavingsAccount = new SavingsAccount(this, accountNumber, Fname, Lname, email, pin, 0.0);
         BANKACCOUNTS.add(newSavingsAccount);
         return newSavingsAccount;
     }
