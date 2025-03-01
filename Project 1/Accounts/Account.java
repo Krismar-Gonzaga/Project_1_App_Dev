@@ -3,7 +3,7 @@ import java.util.ArrayList;
 // Abstract class Account
 public abstract class Account {
     // Attributes
-    private Bank BAND;
+    private Bank BANK;
     private String ACCOUNTNUMBER;
     private String OWNERFNAME;
     private String OWNERLNAME;
@@ -13,7 +13,7 @@ public abstract class Account {
 
     // Constructor
     public Account(Bank BANK, String ACCOUNTNUMBER, String OWNERFNAME, String OWNERLNAME, String OWNEREMAIL, String pin) {
-        this.BAND = BANK;
+        this.BANK = BANK;
         this.ACCOUNTNUMBER = ACCOUNTNUMBER;
         this.OWNERFNAME = OWNERFNAME;
         this.OWNERLNAME = OWNERLNAME;
