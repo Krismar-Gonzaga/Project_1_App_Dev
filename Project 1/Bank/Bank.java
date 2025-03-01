@@ -65,10 +65,39 @@ public class Bank {
      * @param AccountNum The account number of the account to be returned.
      * @param bank The bank to search for the account.
      */
-    public static boolean accountExists(Bank bank, String AccountNum){
+  public static boolean accountExists(Bank bank, String accountNum) {
+        // Input validation
+        if ((bank == null) || (accountNum == null) || accountNum.isEmpty()) {
+            return false;
+        }
+
+        // Check each account in the bank's accounts list
+        for (Account account : bank.BANKACCOUNTS) {
+            // Compare the account number with the provided account number
+            if (account.getAccountNumber().equals(accountNum)) {
+                return true;
+            }
+        }
+
+        // Account not found
         return false;
     }
-    public String toString(){
-        return "";
+
+    /**
+     * Returns a string representation of the Bank object.
+     * @return A string that represents this Bank object.
+     */
+    @Override
+    public String toString() {
+        String sb = "Bank [ID=" + ID +
+                ", name=" + name +
+                ", DEPOSITLIMIT=" + DEPOSITLIMIT +
+                ", WITHDRAWLIMIT=" + WITHDRAWLIMIT +
+                ", CREDITLIMIT=" + CREDITLIMIT +
+                ", processingFee=" + processingFee +
+                ", Number of accounts=" + BANKACCOUNTS.size() +
+                "]";
+
+        return sb;
     }
 }
