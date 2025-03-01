@@ -1,4 +1,7 @@
-class SavingsAccount extends Account {
+package Accounts;
+import Banks.Bank;
+
+public class SavingsAccount extends Account {
     private double balance;
 
     // Constructor

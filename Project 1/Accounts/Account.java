@@ -1,4 +1,7 @@
+package Accounts;
+
 import java.util.ArrayList;
+import Banks.Bank;
 
 // Abstract class Account
 public abstract class Account {
