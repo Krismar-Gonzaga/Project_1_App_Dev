@@ -1,8 +1,7 @@
 
 package Banks;
-import Accounts.*; // Replace 'com.example.bank' with the actual package name where Account class is located
+import Accounts.*;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Bank {
@@ -34,9 +33,9 @@ public class Bank {
      * @param accountType The class type of the accounts to be displayed (e.g., SavingsAccount.class).
      * @param <T> The generic type representing the account type.
      */
-    public <T> void showAccounts(class <T> accountType){
-        //logics here
-    }
+    // public <T> void showAccounts(class <T> accountType){
+    //     //logics here
+    // }
 
     /*
      * Returns the bank account with the specified account number.
@@ -47,100 +46,18 @@ public class Bank {
      */
 
     public Account getBankAccount(Bank bank, String AccountNum){
-        return null; // temporary
+
+        for (Account account : bank.BANKACCOUNTS){
+            if (AccountNum.equals(account.getAccountNumber())){
+                return  account;
+            }
+
+        }
+        return null;
     }
 
-    public ArrayList<Bank> createNewAccount(){
-        
-        ArrayList<Bank> accounts = new ArrayList<>();
-        int id;
-        while (true) 
-        { 
-            try {
-                System.out.println("Enter ID: ");
-                id = input.nextInt();
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("Please Enter Valid ID!");
-            }
-        }
-        String name;
-        while (true) { 
-            System.out.println("Enter Name: ");
-            name = input.nextLine();
-            if (name == ""){
-                System.out.println("Please Enter Name!");
-
-            }else{
-                break;
-            }
-
-        }
-        String passcode;
-        while (true) { 
-            System.out.println("Enter Passcode: ");
-            passcode = input.nextLine();
-            if (passcode == ""){
-                System.out.println("Please Enter Passcode!");
-
-            }else{
-                break;
-            }
-
-        }
-        
-        double depositlimit;
-        while (true) 
-        { 
-            try {
-                System.out.println("Enter Depositlimit: ");
-                depositlimit = input.nextDouble();
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("Please Enter Valid Depositlimit!");
-            }
-        }
-
-        double withdrawlimit;
-        while (true) 
-        { 
-            try {
-                System.out.println("Enter withdrawlimit: ");
-                withdrawlimit = input.nextDouble();
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("Please Enter Valid withdrawlimit!");
-            }
-        }
-
-        double creditlimit;
-        while (true) 
-        { 
-            try {
-                System.out.println("Enter creditlimit: ");
-                creditlimit = input.nextDouble();
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("Please Enter Valid creditlimit!");
-            }
-        }
-
-        double processingFee;
-        while (true) 
-        { 
-            try {
-                System.out.println("Enter processingFee: ");
-                processingFee = input.nextDouble();
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("Please Enter Valid processing Fee!");
-            }
-        }
-        
-
-        Bank newaccount = new Bank(id,name,passcode,depositlimit,withdrawlimit,creditlimit,processingFee);
-        accounts.add(newaccount);
-        return accounts;
+    public ArrayList<String> createNewAccount(){
+        return null;
     }
 
     public CreditAccount createNewCrediAccount(){

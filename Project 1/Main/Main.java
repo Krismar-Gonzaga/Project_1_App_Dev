@@ -1,10 +1,13 @@
 package Main;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import Banks.Bank;
 public class Main
 {
-
+    
     private static final Scanner input = new Scanner(System.in);
     /**
      * Option field used when selection options during menu prompts. Do not create a different
@@ -19,6 +22,7 @@ public class Main
 
     public static void main(String[] args)
     {
+        Bank b = new Bank(1, "BankName", "BankAddress", 0.0, 0.0, 0.0, 0.0);
         while (true)
         {
             showMenuHeader("Main Menu");
@@ -36,9 +40,9 @@ public class Main
                 showMenu(getOption(), 1);
                 // TODO: Complete this portion
 
-                if (getOption() == 1){
+                // if (getOption() == 1){
                     
-                }
+                // }
             }
             // Bank Option
             else if (getOption() == 2)
@@ -49,6 +53,12 @@ public class Main
             else if (getOption() == 3)
             {
                 // TODO: Complete this portion...
+                
+                ArrayList<String> newaccount;
+                newaccount = b.createNewAccount();
+                for (String data : newaccount){
+                    System.out.println(data);
+                }
             }
             else if (getOption() == 4)
             {
