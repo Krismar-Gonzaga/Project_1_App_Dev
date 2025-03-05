@@ -124,7 +124,12 @@ public class Bank {
     }
 
     public void addNewAccount(Account account){
-
+        if (account != null){
+            BANKACCOUNTS.add(account);
+            System.out.println("Account created successfully!");
+        } else{
+            System.out.println("Error: Cannot add null account.");
+        }
     }
     /*
      * Returns if the account with the specified account number exists in the bank.
