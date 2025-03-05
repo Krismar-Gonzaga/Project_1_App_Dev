@@ -33,8 +33,12 @@ public class Bank {
      * @param accountType The class type of the accounts to be displayed (e.g., SavingsAccount.class).
      * @param <T> The generic type representing the account type.
      */
-    public <T> void showAccounts(class <T> accountType){
-        //logics here
+    public <T> void showAccounts(Class<T> accountType){
+        for (Account account: BANKACCOUNTS){
+            if (accountType.isInstance(account)){
+                System.out.println(account);
+            }
+        }
     }
 
     /*
@@ -46,9 +50,18 @@ public class Bank {
      */
 
     public Account getBankAccount(Bank bank, String AccountNum){
-        return null; // temporary
+        for (Account account: bank.BANKACCOUNTS) {
+            if (account.getACCOUNTNUMBER().equals(AccountNum)) {
+                return account;
+            }
+        }
+        return null; // Return null if account is not found
     }
 
+    /*
+     * Returns the bank account with the specified account number.
+     * @param AccountNum The account number of the account to be returned.
+     */
     public ArrayList<String> createNewAccount(){
         Scanner scanner = new Scanner(System.in);
         ArrayList<String> newAccount = new ArrayList<>();
@@ -74,6 +87,7 @@ public class Bank {
         newAccount.add(email);
         newAccount.add(pin);
 
+        scanner.close();
         return newAccount;
     }
     /*
@@ -110,7 +124,12 @@ public class Bank {
     }
 
     public void addNewAccount(Account account){
-
+        if (account != null){
+            BANKACCOUNTS.add(account);
+            System.out.println("Account created successfully!");
+        } else{
+            System.out.println("Error: Cannot add null account.");
+        }
     }
     /*
      * Returns if the account with the specified account number exists in the bank.
@@ -126,7 +145,7 @@ public class Bank {
         // Check each account in the bank's accounts list
         for (Account account : bank.BANKACCOUNTS) {
             // Compare the account number with the provided account number
-            if (account.getAccountNumber().equals(accountNum)) {
+            if (account.getACCOUNTNUMBER().equals(accountNum)) {
                 return true;
             }
         }
@@ -134,14 +153,10 @@ public class Bank {
         // Account not found
         return false;
     }
-    public String toString(){
-        return "";
-
     /**
      * Returns a string representation of the Bank object.
      * @return A string that represents this Bank object.
      */
-    @Override
     public String toString() {
         String sb = "Bank [ID=" + ID +
                 ", name=" + name +
@@ -153,4 +168,5 @@ public class Bank {
                 "]";
 
         return sb;
+    }
 }
