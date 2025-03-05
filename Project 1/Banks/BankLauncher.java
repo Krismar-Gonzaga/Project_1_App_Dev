@@ -141,8 +141,8 @@ public class BankLauncher {
     }
 
     public static Account findAccount(String accountNum) {
-        for (Bank bank : BANKS) {
-            Account account = bank.getBankAccount(bank,accountNum);
+        for (Bank b : BANKS) {
+            Account account = b.getBankAccount(b,accountNum);
             if (account != null) {
                 return account;
             }
