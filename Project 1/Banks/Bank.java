@@ -134,14 +134,10 @@ public class Bank {
         // Account not found
         return false;
     }
-    public String toString(){
-        return "";
-
     /**
      * Returns a string representation of the Bank object.
      * @return A string that represents this Bank object.
      */
-    @Override
     public String toString() {
         String sb = "Bank [ID=" + ID +
                 ", name=" + name +
