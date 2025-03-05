@@ -126,7 +126,7 @@ public class Bank {
         // Check each account in the bank's accounts list
         for (Account account : bank.BANKACCOUNTS) {
             // Compare the account number with the provided account number
-            if (account.getAccountNumber().equals(accountNum)) {
+            if (account.getACCOUNTNUMBER().equals(accountNum)) {
                 return true;
             }
         }

@@ -14,6 +14,30 @@ public abstract class Account {
     private String pin;
     private ArrayList<Transaction> TRANSACTION;
 
+    public Bank getBANK() {
+        return BANK;
+    }
+
+    public String getACCOUNTNUMBER() {
+        return ACCOUNTNUMBER;
+    }
+
+    public String getOWNERFNAME() {
+        return OWNERFNAME;
+    }
+
+    public String getOWNERLNAME() {
+        return OWNERLNAME;
+    }
+
+    public String getOWNEREMAIL() {
+        return OWNEREMAIL;
+    }
+
+    public String getPin() {
+        return pin;
+    }
+
     // Constructor
     public Account(Bank BANK, String ACCOUNTNUMBER, String OWNERFNAME, String OWNERLNAME, String OWNEREMAIL, String pin) {
         this.BANK = BANK;
