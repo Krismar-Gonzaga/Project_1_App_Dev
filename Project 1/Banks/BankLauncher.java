@@ -132,15 +132,22 @@ public class BankLauncher {
     }
 
     public static Bank getBank(Comparator<Bank> comparator, Bank bank) {
-        return BANKS.stream().min(comparator).orElse(bank);
+        for (Bank b : BANKS) {
+            if (comparator.compare(b, bank) == 0) {
+                return b;
+            }
+        }
+        return null;
     }
 
     public static Account findAccount(String accountNum) {
-        if (!isLogged()) {
-            System.out.println("Please log in to a bank first.");
-            return null;
+        for (Bank bank : BANKS) {
+            Account account = bank.getBankAccount(bank,accountNum);
+            if (account != null) {
+                return account;
+            }
         }
-        return loggedBank.getBankAccount(loggedBank, accountNum);
+        return null;
     }
 
     public static int bankSize() {
