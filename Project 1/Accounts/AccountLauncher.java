@@ -58,23 +58,41 @@ public abstract class AccountLauncher {
      *
      * @return True if the user is logged in, false otherwise.
      */
-    public abstract boolean isLogged();
+    public boolean isLoggedIn() {
+        return loggedAccount != null;
+    }
 
     /**
      * Sets the currently logged-in account.
      *
      * @param account The account to set as logged-in.
      */
-    public abstract void setAccount(Account account);
+    public void setLogSession(Account account) {
+        this.loggedAccount = account;
+        System.out.println("Login successful for " + account.getAccountNumber());
+    }
+
 
     /**
-     * Validates login credentials.
-     *
-     * @param accountNumber The account number provided by the user.
-     * @param pin The PIN provided by the user.
-     * @return True if credentials are valid, false otherwise.
+     * Checks inputted credentials during account login.
+     * 
+     * @param accountNum - Account number.
+     * @param pin - 4-digit pin.
+     * @return Account object if it passes verification. Null if not.
      */
-    public abstract boolean checkCredentials(String accountNumber, String pin);
+    public Account checkCredentials(String accountNum, String pin) {
+    // Get the associated bank
+    Bank bank = this.assocBank;
+    
+    // Check if the account exists in the bank and the PIN matches
+    if (bank != null && bank.accountExists(accountNum, pin)) {
+        // If verification passes, retrieve the account from the bank
+        return bank.getAccount(accountNum);
+    } 
+    
+    // If verification fails, return null
+    return null;
+}
 }
 
 
