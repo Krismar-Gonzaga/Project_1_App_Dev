@@ -1,18 +1,13 @@
 package Accounts;
 import Banks.Bank;
 
-public class CreditAccount extends Account {
+public class CreditAccount extends Account implements Payment {
     private double loan;
 
     // Constructor
     public CreditAccount(Bank bank, String accountNumber, String ownerFName, String ownerLName, String ownerEmail, String pin, double loan) {
         super(bank, accountNumber, ownerFName, ownerLName, ownerEmail, pin);
         this.loan = loan;
-    }
-
-    // Get loan statement
-    public String getLoanStatement() {
-        return "Current Loan: " + loan;
     }
 
     // Check if loan can be adjusted
@@ -24,14 +19,20 @@ public class CreditAccount extends Account {
     public void adjustLoanAmount(double amountAdjustment) {
         if (canCredit(amountAdjustment)) {
             loan += amountAdjustment;
+            System.out.println("Loan adjusted successfully. New loan amount: " + loan);
         } else {
             System.out.println("Loan adjustment not possible!");
         }
     }
 
-    // toString method
+        // toString method
+        @Override
+        public String toString() {
+            return super.toString() + "\nLoan: " + loan;
+        }
+
     @Override
-    public String toString() {
-        return super.toString() + "\nLoan: " + loan;
+    public boolean pay(Account account, double amount) {
+        return false;
     }
 }
