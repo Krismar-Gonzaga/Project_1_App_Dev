@@ -1,8 +1,7 @@
 package Accounts;
 import Banks.*;
 
-
-public class SavingsAccount extends Account {
+public class SavingsAccount extends Account implements Withdrawal, Deposit, FundTransfer {
     private double balance;
 
     // Constructor
@@ -28,16 +27,71 @@ public class SavingsAccount extends Account {
 
     // Adjust account balance
     public void adjustAccountBalance(double amount) {
-        if (hasEnoughBalance(amount)) {
-            if (this.balance < amount) {
-                this.balance = 0.0;
-            }else{
-                this.balance -= amount;
-            }
-           
+        if (amount > 0 && hasEnoughBalance(amount)) {
+            balance -= amount;
         } else {
             insufficientBalance();
         }
+    }
+
+    // Implement withdrawal method
+    @Override
+    public boolean withdrawal(double amount) {
+        if (amount <= 0) {
+            System.out.println("Invalid withdrawal amount.");
+            return false;
+        }
+
+        if (hasEnoughBalance(amount)) {
+            balance -= amount;
+            System.out.println("Withdrawal successful. New balance: " + balance);
+            return true;
+        } else {
+            insufficientBalance();
+            return false;
+        }
+    }
+
+    // Implement cash deposit method
+    @Override
+    public boolean cashDeposit(double amount) {
+        if (amount > 0) {
+            this.balance += amount;
+            System.out.println("Deposit successful. New balance: " + balance);
+            return true;
+        } else {
+            System.out.println("Invalid deposit amount.");
+            return false;
+        }
+    }
+
+    // Implement transfer between accounts
+    @Override
+    public boolean transfer(Account account, double amount) throws IllegalAccountType {
+        if (!(account instanceof SavingsAccount) && !(account instanceof CreditAccount)) {
+            throw new IllegalAccountType("Invalid account type for transfer.");
+        }
+
+        if (!hasEnoughBalance(amount)) {
+            insufficientBalance();
+            return false;
+        }
+
+        this.withdrawal(amount);
+        account.cashDeposit(amount);
+        System.out.println("Transfer successful. New balance: " + balance);
+        return true;
+    }
+
+    // Implement transfer to another bank account
+    @Override
+    public boolean transfer(Bank bank, Account account, double amount) throws IllegalAccountType {
+        if (bank == null || account == null) {
+            System.out.println("Invalid bank or account details.");
+            return false;
+        }
+
+        return transfer(account, amount);
     }
 
     // toString method
