@@ -35,7 +35,7 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
     }
 
     // Implement withdrawal method
-    @Override
+    
     public boolean withdrawal(double amount) {
         if (amount <= 0) {
             System.out.println("Invalid withdrawal amount.");
@@ -68,7 +68,7 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
     // Implement transfer between accounts
     @Override
     public boolean transfer(Account account, double amount) throws IllegalAccountType {
-        if (!(account instanceof SavingsAccount) && !(account instanceof CreditAccount)) {
+        if (!(account instanceof CreditAccount) && !(account instanceof CreditAccount)) {
             throw new IllegalAccountType("Invalid account type for transfer.");
         }
 
@@ -78,7 +78,9 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
         }
 
         this.withdrawal(amount);
-        cashDeposit(amount);
+        if (account instanceof SavingsAccount) {
+            ((SavingsAccount) account).cashDeposit(amount);
+        } 
         System.out.println("Transfer successful. New balance: " + balance);
         return true;
     }
