@@ -50,13 +50,13 @@ public class SavingsAccountLauncher extends AccountLauncher {
             }
         }
 
-        SavingsAccount account = bank.getSavingsAccount(accountNumber);
-        if (account != null) {
-            account.deposit(amount);
-            System.out.println("Deposit successful.");
-        } else {
-            System.out.println("Account not found.");
-        }
+//        SavingsAccount account = bank.getSavingsAccount(accountNumber);
+//        if (account != null) {
+//            account.deposit(amount);
+//            System.out.println("Deposit successful.");
+//        } else {
+//            System.out.println("Account not found.");
+//        }
     }
 
     private void withdrawProcess() {
@@ -73,3 +73,4 @@ public class SavingsAccountLauncher extends AccountLauncher {
     public SavingsAccount getLoggedAccount() {
         return null;
     }
+}

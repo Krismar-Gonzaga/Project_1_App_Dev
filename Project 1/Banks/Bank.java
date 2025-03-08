@@ -118,7 +118,7 @@ public class Bank {
 
     public Account getBankAccount(Bank bank, String AccountNum) {
         for (Account account : bank.BANKACCOUNTS) {
-            if (account.getACCOUNTNUMBER() == AccountNum) {
+            if (account.getACCOUNTNUMBER().equals(AccountNum)) {
                 return account;
             }
         }
