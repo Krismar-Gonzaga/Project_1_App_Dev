@@ -78,7 +78,7 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
         }
 
         this.withdrawal(amount);
-        account.cashDeposit(amount);
+        cashDeposit(amount);
         System.out.println("Transfer successful. New balance: " + balance);
         return true;
     }

@@ -1,4 +1,6 @@
 package Main;
+import Banks.BankLauncher;
+import Banks.Bank;
 
 import java.util.Scanner;
 
@@ -35,6 +37,13 @@ public class Main
                 setOption();
                 showMenu(getOption(), 1);
                 // TODO: Complete this portion
+
+                BankLauncher.bankLogin();
+                if (BankLauncher.isLogged())
+                {
+                    BankLauncher.bankInit();
+                }
+
             }
             // Bank Option
             else if (getOption() == 2)
@@ -45,6 +54,8 @@ public class Main
             else if (getOption() == 3)
             {
                 // TODO: Complete this portion...
+                BankLauncher.createNewBank();
+
             }
             else if (getOption() == 4)
             {
