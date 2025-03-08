@@ -1,10 +1,7 @@
 package Banks;
 
+import Accounts.*;
 import java.util.*;
-
-import Accounts.Account;
-import Accounts.CreditAccount;
-import Accounts.SavingsAccount;
 
 public class BankLauncher {
     private static final ArrayList<Bank> BANKS = new ArrayList<>();
@@ -16,7 +13,7 @@ public class BankLauncher {
 
     public static void bankInit() {
         // Implement logic to initialize bank-related operations
-                if (!isLogged()) {
+        if (!isLogged()) {
             System.out.println("Please log in to a bank first.");
             return;
         }
@@ -110,8 +107,7 @@ public class BankLauncher {
             Bank newBank = new Bank(ID, name, passcode);
             addBank(newBank);
             System.out.println("New bank created successfully.");
-        } 
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             System.out.println("Invalid input. Please enter correct values.");
         }
     }
@@ -142,7 +138,7 @@ public class BankLauncher {
 
     public static Account findAccount(String accountNum) {
         for (Bank b : BANKS) {
-            Account account = b.getBankAccount(b,accountNum);
+            Account account = b.getBankAccount(b, accountNum);
             if (account != null) {
                 return account;
             }

@@ -1,8 +1,8 @@
 package Banks;
 
+import Accounts.*;
 import java.util.*;
 
-import Accounts.*;
 
 public class Bank {
     private int ID;
@@ -20,22 +20,87 @@ public class Bank {
         this.BANKACCOUNTS = new ArrayList<>();
     }
 
-    public Bank(int ID, String name, String passcode, double DEPOSITLIMIT, double WITHDRAWLIMIT, double CREDITLIMIT, double processingFee) {
+    public Bank(int ID, String name, String passcode, double DEPOSITLIMIT, double WITHDRAWLIMIT, double CREDITLIMIT,
+            double processingFee) {
         this(ID, name, passcode);
         this.DEPOSITLIMIT = DEPOSITLIMIT;
         this.WITHDRAWLIMIT = WITHDRAWLIMIT;
         this.CREDITLIMIT = CREDITLIMIT;
         this.processingFee = processingFee;
     }
+
+    // Getters
+    public int getID() {
+        return ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPasscode() {
+        return passcode;
+    }
+
+    public double getDepositLimit() {
+        return DEPOSITLIMIT;
+    }
+
+    public double getWithdrawLimit() {
+        return WITHDRAWLIMIT;
+    }
+
+    public double getCreditLimit() {
+        return CREDITLIMIT;
+    }
+
+    public double getProcessingFee() {
+        return processingFee;
+    }
+
+    public ArrayList<Account> getBankAccounts() {
+        return this.BANKACCOUNTS;
+    }
+
+    // Setters
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPasscode(String passcode) {
+        this.passcode = passcode;
+    }
+
+    public void setDepositLimit(double DEPOSITLIMIT) {
+        this.DEPOSITLIMIT = DEPOSITLIMIT;
+    }
+
+    public void setWithdrawLimit(double WITHDRAWLIMIT) {
+        this.WITHDRAWLIMIT = WITHDRAWLIMIT;
+    }
+
+    public void setCreditLimit(double CREDITLIMIT) {
+        this.CREDITLIMIT = CREDITLIMIT;
+    }
+
+    public void setProcessingFee(double processingFee) {
+        this.processingFee = processingFee;
+    }
+
     /**
      * Displays all accounts of a specific type stored in the bank.
      *
-     * @param accountType The class type of the accounts to be displayed (e.g., SavingsAccount.class).
-     * @param <T> The generic type representing the account type.
+     * @param accountType The class type of the accounts to be displayed (e.g.,
+     *                    SavingsAccount.class).
+     * @param <T>         The generic type representing the account type.
      */
-    public <T> void showAccounts(Class<T> accountType){
-        for (Account account: BANKACCOUNTS){
-            if (accountType.isInstance(account)){
+    public <T> void showAccounts(Class<T> accountType) {
+        for (Account account : BANKACCOUNTS) {
+            if (accountType.isInstance(account)) {
                 System.out.println(account);
             }
         }
@@ -43,15 +108,17 @@ public class Bank {
 
     /*
      * Returns the bank account with the specified account number.
+     * 
      * @param bank The bank to search for the account.
+     * 
      * @param AccountNum The account number of the account to be returned.
      * 
      * @return The account with the specified account number.
      */
 
-    public Account getBankAccount(Bank bank, String AccountNum){
-        for (Account account: bank.BANKACCOUNTS) {
-            if (account.getACCOUNTNUMBER().equals(AccountNum)) {
+    public Account getBankAccount(Bank bank, String AccountNum) {
+        for (Account account : bank.BANKACCOUNTS) {
+            if (account.getACCOUNTNUMBER() == AccountNum) {
                 return account;
             }
         }
@@ -60,9 +127,10 @@ public class Bank {
 
     /*
      * Returns the bank account with the specified account number.
+     * 
      * @param AccountNum The account number of the account to be returned.
      */
-    public ArrayList<String> createNewAccount(){
+    public ArrayList<String> createNewAccount() {
         Scanner scanner = new Scanner(System.in);
         ArrayList<String> newAccount = new ArrayList<>();
 
@@ -92,10 +160,11 @@ public class Bank {
     }
     /*
      * Creates a new credit account and adds it to the bank.
+     * 
      * @return The newly created credit account.
      */
 
-    public CreditAccount createNewCreditAccount(){
+    public CreditAccount createNewCreditAccount() {
         ArrayList<String> newAccount = createNewAccount();
         String accountNumber = newAccount.get(0);
         String Fname = newAccount.get(1);
@@ -107,11 +176,13 @@ public class Bank {
         BANKACCOUNTS.add(newCreditAccount);
         return newCreditAccount;
     }
+
     /*
      * Creates a new savings account and adds it to the bank.
+     * 
      * @return The newly created savings account.
      */
-    public SavingsAccount createNewSavingsAccount(){
+    public SavingsAccount createNewSavingsAccount() {
         ArrayList<String> newAccount = createNewAccount();
         String accountNumber = newAccount.get(0);
         String Fname = newAccount.get(1);
@@ -123,17 +194,20 @@ public class Bank {
         return newSavingsAccount;
     }
 
-    public void addNewAccount(Account account){
-        if (account != null){
+    public void addNewAccount(Account account) {
+        if (account != null) {
             BANKACCOUNTS.add(account);
             System.out.println("Account created successfully!");
-        } else{
+        } else {
             System.out.println("Error: Cannot add null account.");
         }
     }
+
     /*
      * Returns if the account with the specified account number exists in the bank.
+     * 
      * @param AccountNum The account number of the account to be returned.
+     * 
      * @param bank The bank to search for the account.
      */
     public static boolean accountExists(Bank bank, String accountNum) {
@@ -153,8 +227,10 @@ public class Bank {
         // Account not found
         return false;
     }
+
     /**
      * Returns a string representation of the Bank object.
+     * 
      * @return A string that represents this Bank object.
      */
     public String toString() {
