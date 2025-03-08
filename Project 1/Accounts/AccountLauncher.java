@@ -81,8 +81,6 @@ public class AccountLauncher {
         this.loggedAccount = null;
         
     }
-
-    
     /**
      * Checks inputted credentials during account login.
      * 
