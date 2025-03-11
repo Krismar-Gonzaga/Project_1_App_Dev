@@ -14,7 +14,7 @@ public class CreditAccountLauncher extends AccountLauncher {
         CreditAccount account = getLoggedAccount();
         if (account != null) {
             System.out.println("Credit Account Menu");
-            System.out.println("Account Number: " + account.getAccountNumber());
+            System.out.println("Account Number: " + account.getACCOUNTNUMBER());
             System.out.println("Current Balance: " + account.getBalance());
             System.out.println("Available Credit: " + account.getAvailableCredit());
         } else {
