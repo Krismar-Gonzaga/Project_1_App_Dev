@@ -245,4 +245,39 @@ public class Bank {
 
         return sb;
     }
+
+    public static class BankComparator implements Comparator<Bank> {
+        @Override
+        public int compare(Bank b1, Bank b2) {
+            // First compare IDs
+            int idComparison = Integer.compare(b1.getID(), b2.getID());
+            if (idComparison != 0) return idComparison;
+
+            // Then compare names
+            int nameComparison = b1.getName().compareTo(b2.getName());
+            if (nameComparison != 0) return nameComparison;
+
+            // Finally compare passcodes
+            return b1.getPasscode().compareTo(b2.getPasscode());
+        }
+    }
+
+    public static class BankIdComparator implements Comparator<Bank>{
+        @Override
+        public int compare(Bank b1, Bank b2){
+            return  Integer.compare(b1.getID(), b2.getID());
+        }
+    }
+
+    public static class BankCredentialsComparator implements Comparator<Bank> {
+        @Override
+
+        public int compare(Bank b1, Bank b2){
+            int nameComparison = b1.getName().compareTo(b2.getName());
+            if (nameComparison != 0) return nameComparison;
+
+            return b1.getPasscode().compareTo(b2.getPasscode());
+        }
+    }
+
 }
