@@ -68,7 +68,7 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
     // Implement transfer between accounts
     @Override
     public boolean transfer(Account account, double amount) throws IllegalAccountType {
-        if (!(account instanceof CreditAccount) && !(account instanceof CreditAccount)) {
+        if (!(account instanceof Deposit)) {//changed the code here
             throw new IllegalAccountType("Invalid account type for transfer.");
         }
 
@@ -78,10 +78,18 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
         }
 
         this.withdrawal(amount);
-        if (account instanceof SavingsAccount) {
-            ((SavingsAccount) account).cashDeposit(amount);
-        } 
+//        if (account instanceof SavingsAccount) {
+//            ((SavingsAccount) account).cashDeposit(amount);
+//        }
+        ((Deposit) account).cashDeposit(amount);
         System.out.println("Transfer successful. New balance: " + balance);
+
+        //record the transfer
+//        this.addNewTransaction(
+//                account.getACCOUNTNUMBER(),
+//                Transaction.Transactions.FundTransfer,
+//                "Transfered $" + amount + "to" + account.getACCOUNTNUMBER()
+//        );
         return true;
     }
 
