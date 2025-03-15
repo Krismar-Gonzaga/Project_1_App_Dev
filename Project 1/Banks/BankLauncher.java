@@ -76,7 +76,8 @@ public class BankLauncher {
         System.out.print("Enter Passcode: ");
         String passcode = input.nextLine();
         for (Bank bank : BANKS) {
-            if (bank.toString().contains(name) && bank.toString().contains(passcode)) {
+            //if(bank.toString().contains(name) && bank.toString().contains(passcode)) altered
+            if (bank.getName().equals(name) && bank.getPasscode().equals(passcode)) {
                 setLogSession(bank);
                 System.out.println("Logged in to bank: " + name);
                 return;
