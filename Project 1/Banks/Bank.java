@@ -234,12 +234,13 @@ public class Bank {
      * @return A string that represents this Bank object.
      */
     public String toString() {
-        String sb = "Bank [ID=" + ID +
-                ", name=" + name +
-                ", DEPOSITLIMIT=" + DEPOSITLIMIT +
-                ", WITHDRAWLIMIT=" + WITHDRAWLIMIT +
-                ", CREDITLIMIT=" + CREDITLIMIT +
-                ", processingFee=" + processingFee +
+        String sb = "Bank [ID=" + getID() +
+                ", name=" + getName() +
+                ", passcode= " + getPasscode() +
+                ", DEPOSITLIMIT=" + getDepositLimit() +
+                ", WITHDRAWLIMIT=" + getDepositLimit() +
+                ", CREDITLIMIT=" + getCreditLimit() +
+                ", processingFee=" + getProcessingFee() +
                 ", Number of accounts=" + BANKACCOUNTS.size() +
                 "]";
 
