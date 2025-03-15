@@ -1,5 +1,6 @@
 package Accounts;
 import Banks.*;
+import java.util.Scanner;
 
 public class CreditAccountLauncher extends AccountLauncher {
     public CreditAccountLauncher(Bank bank, Account account) {
@@ -11,31 +12,43 @@ public class CreditAccountLauncher extends AccountLauncher {
      * menu after Credit Account users log in to the application.
      */
     public void creditAccountInit() {
-        CreditAccount account = getLoggedAccount();
-        if (account != null) {
-            System.out.println("Credit Account Menu");
-            System.out.println("Account Number: " + account.getACCOUNTNUMBER());
-            System.out.println("Current Balance: " + account.getBalance());
-            System.out.println("Available Credit: " + account.getAvailableCredit());
-        } else {
-            System.out.println("No credit account is currently logged in.");
+        CreditAccount acc =getLoggedAccount();
+        if (acc != null){
+            System.out.println("Credit Account Initialized: " + acc.getACCOUNTNUMBER());
         }
     }
     
     public void creditRepaymentProcess() {
         // Implementation pending
-    }
-  
-    public void creditRecompenseProcess(Bank bank) {
+        CreditAccount acc = getLoggedAccount();
+        if (acc != null) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter target account number: ");
+            String targetAccountNum = scanner.nextLine();
+            System.out.print("Enter amount: ");
+            double amount = scanner.nextDouble();
 
-    }
-
-  
-    protected CreditAccount getLoggedAccount() {
-       Account account = super.getLoggedAccount();
-        if (account instanceof CreditAccount) {
-            return (CreditAccount) account;
+            Account targetAccount = BankLauncher.findAccount(targetAccountNum);
+            if (targetAccount != null) {
+                acc.pay(targetAccount, amount);
+            } else {
+                System.out.println("Target account not found.");
+            }
         }
-        return null;
+    }
+  
+    public void creditRecompenseProcess() {
+        CreditAccount acc = getLoggedAccount();
+        if(acc != null) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter repayment amount: ");
+            double amount = scanner.nextDouble();
+            acc.recompense(amount);
+        }
+    }
+
+    @Override
+    protected CreditAccount getLoggedAccount() {
+       return (CreditAccount)   super.getLoggedAccount();
     }
 }
