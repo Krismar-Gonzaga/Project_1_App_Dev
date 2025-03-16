@@ -1,6 +1,6 @@
 package Main;
+import Accounts.*;
 import Banks.BankLauncher;
-import Banks.Bank;
 
 import java.util.Scanner;
 
@@ -37,11 +37,29 @@ public class Main
                 setOption();
                 showMenu(getOption(), 1);
                 // TODO: Complete this portion
+                if (getOption() ==1 ){
+                    String accountNum = Main.prompt("Enter Account Number: ", true);
+                    String pin = Main.prompt("Enter PIN: ",true);
 
-                BankLauncher.bankLogin();
-                if (BankLauncher.isLogged())
-                {
-                    BankLauncher.bankInit();
+                    Account acc = BankLauncher.findAccount(accountNum);
+                    if(acc != null && acc.getPin().equals(pin)){
+                        if (acc instanceof SavingsAccount){
+                            SavingsAccountLauncher launcher = new SavingsAccountLauncher(acc.getBANK(),acc);
+                            launcher.accountLogin();
+                            showMenu(51,1);
+                            setOption();
+                        }
+                        else if(acc instanceof CreditAccount){
+                            CreditAccountLauncher launcher = new CreditAccountLauncher(acc.getBANK(), account);
+                            launcher.accountLogin();
+                            showMenu(41,1);
+                            setOption();
+                        }
+                        else{
+                            System.out.println("Invalid account number or pin");
+                        }
+
+                    }
                 }
 
             }
