@@ -29,11 +29,11 @@ public class AccountLauncher {
 
         // Prompt for account credentials
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter passcode: ");
-        String passcode = scanner.nextLine();
+        System.out.print("Enter AccountNumber: ");
+        String accountNumber = scanner.next();
 
         // Check if the account exists in the selected bank
-        Account account = selectedBank.getBankAccount(assocBank, passcode);
+        Account account = selectedBank.getBankAccount(assocBank, accountNumber);
         if (account != null) {
             setLogSession(account);
             System.out.println("Login successful.");
@@ -49,9 +49,8 @@ public class AccountLauncher {
         while (true) { 
             try {
                 Scanner scanner = new Scanner(System.in);
-                System.out.println("Enter ID to select a Bank: ");
+                System.out.print("Enter ID to select a Bank: ");
                 id = scanner.nextInt();
-                scanner.close();
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a valid ID.");
@@ -67,8 +66,6 @@ public class AccountLauncher {
         }
 
         return null;
-
-
     }
 
     public void setLogSession(Account account) {

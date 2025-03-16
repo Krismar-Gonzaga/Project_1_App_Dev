@@ -1,5 +1,6 @@
 package Accounts;
 import Banks.*;
+import Main.Main;
 import java.util.Scanner;
 
 public class CreditAccountLauncher extends AccountLauncher {
@@ -14,7 +15,44 @@ public class CreditAccountLauncher extends AccountLauncher {
     public void creditAccountInit() {
         CreditAccount acc =getLoggedAccount();
         if (acc != null){
-            System.out.println("Credit Account Initialized: " + acc.getACCOUNTNUMBER());
+//            System.out.println("Credit Account Initialized: " + acc.getACCOUNTNUMBER());
+
+            System.out.println("\n--- Credit Account Dashboard ---");
+            System.out.println("Account Number: " + acc.getACCOUNTNUMBER());
+            System.out.println("Outstanding Loan: " + acc.getLoanStatement());
+
+            boolean stayInMenu = true;
+
+            while (stayInMenu){
+
+                Main.showMenuHeader("Credit Account Menu");
+                Main.showMenu(41,1);
+                Main.setOption();
+
+                switch(Main.getOption()){
+                    case 1:
+                        System.out.println(acc.getLoanStatement());
+                        break;
+                    case 2:
+                        creditRepaymentProcess();
+                        break;
+                    case 3:
+                        creditRecompenseProcess();
+                        break;
+                    case 4:
+                        System.out.println(acc.getTransactionsInfo());
+                        break;
+                    case 5:
+                        stayInMenu = false;
+                        System.out.println("Logging out from Account...");
+                        break;
+                    default:
+                        System.out.print("Invalid choice");
+
+                }
+            }
+        } else{
+            System.out.print("No credit account login");
         }
     }
     
