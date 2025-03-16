@@ -1,6 +1,6 @@
 package Main;
 import Accounts.*;
-import Banks.BankLauncher;
+import Banks.*;
 
 import java.util.Scanner;
 
@@ -50,7 +50,7 @@ public class Main
                             setOption();
                         }
                         else if(acc instanceof CreditAccount){
-                            CreditAccountLauncher launcher = new CreditAccountLauncher(acc.getBANK(), account);
+                            CreditAccountLauncher launcher = new CreditAccountLauncher(acc.getBANK(), acc);
                             launcher.accountLogin();
                             showMenu(41,1);
                             setOption();
@@ -67,6 +67,11 @@ public class Main
             else if (getOption() == 2)
             {
                 // TODO: Complete Bank option
+                BankLauncher.bankLogin();
+
+                if(BankLauncher.isLogged()){
+                    BankLauncher.bankInit();
+                }
             }
             // Create New Bank
             else if (getOption() == 3)

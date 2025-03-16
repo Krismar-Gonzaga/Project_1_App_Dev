@@ -99,10 +99,16 @@ public class Bank {
      * @param <T>         The generic type representing the account type.
      */
     public <T> void showAccounts(Class<T> accountType) {
+        if (accountType != null){
+
         for (Account account : BANKACCOUNTS) {
             if (accountType.isInstance(account)) {
                 System.out.println(account);
+                }
             }
+        }
+        else{
+            System.out.print("No accounts available.");
         }
     }
 
@@ -155,7 +161,6 @@ public class Bank {
         newAccount.add(email);
         newAccount.add(pin);
 
-        scanner.close();
         return newAccount;
     }
     /*
@@ -174,6 +179,7 @@ public class Bank {
 
         CreditAccount newCreditAccount = new CreditAccount(this, accountNumber, Fname, Lname, email, pin, 0.0);
         BANKACCOUNTS.add(newCreditAccount);
+        System.out.println("New Credit Account created successfully!");
         return newCreditAccount;
     }
 
@@ -191,6 +197,7 @@ public class Bank {
         String pin = newAccount.get(4);
         SavingsAccount newSavingsAccount = new SavingsAccount(this, accountNumber, Fname, Lname, email, pin, 0.0);
         BANKACCOUNTS.add(newSavingsAccount);
+        System.out.println("New Savings Account created successfully!");
         return newSavingsAccount;
     }
 
