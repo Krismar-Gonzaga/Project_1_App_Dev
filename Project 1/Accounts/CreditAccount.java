@@ -78,4 +78,8 @@ public class CreditAccount extends Account implements Payment, Recompense {
     public String toString() {
         return super.toString() + "\nLoan: " + loan;
     }
+
+    public double getLoan() {
+        return loan;
+    }
 }

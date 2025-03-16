@@ -22,15 +22,15 @@ public abstract class Account {
     public String getACCOUNTNUMBER() {
         return ACCOUNTNUMBER;
     }
-    public String getOWNERFNAME() {
+    public String getOwnerFname() {
         return OWNERFNAME;
     }
 
-    public String getOWNERLNAME() {
+    public String getOwnerLname() {
         return OWNERLNAME;
     }
 
-    public String getOWNEREMAIL() {
+    public String getOwnerEmail() {
         return OWNEREMAIL;
     }
 
@@ -77,5 +77,4 @@ public abstract class Account {
                "Email: " + this.OWNEREMAIL + "\n" +
                getTransactionsInfo();
     }
-
 }
