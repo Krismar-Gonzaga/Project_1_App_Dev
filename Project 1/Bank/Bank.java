@@ -1,4 +1,4 @@
-package Banks;
+package Bank;
 
 import Accounts.*;
 import java.util.*;

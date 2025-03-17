@@ -1,5 +1,5 @@
 package Accounts;
-import Banks.*;
+import Bank.*;
 
 public class SavingsAccount extends Account implements Withdrawal, Deposit, FundTransfer {
     private double balance;
@@ -108,5 +108,9 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
     @Override
     public String toString() {
         return super.toString() + "\nBalance: " + balance;
+    }
+
+    public double getAccountBalance() {
+        return balance;
     }
 }

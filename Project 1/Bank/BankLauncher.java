@@ -1,6 +1,5 @@
-package Banks;
+package Bank;
 import Main.Main;
-import Main.Menu;
 
 import Accounts.*;
 

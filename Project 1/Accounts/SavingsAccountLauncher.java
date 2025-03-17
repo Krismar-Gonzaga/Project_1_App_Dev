@@ -1,5 +1,5 @@
 package Accounts;
-import Banks.*;
+import Bank.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 

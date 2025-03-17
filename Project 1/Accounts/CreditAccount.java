@@ -1,6 +1,6 @@
 package Accounts;
 
-import Banks.*;
+import Bank.*;
 
 public class CreditAccount extends Account implements Payment, Recompense {
     private double loan;
@@ -71,6 +71,7 @@ public class CreditAccount extends Account implements Payment, Recompense {
 
         System.out.println("Invalid account type for payment.");
         return false;
+
     }
 
     // toString method
