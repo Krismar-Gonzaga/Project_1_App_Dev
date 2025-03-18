@@ -1,6 +1,8 @@
 package Accounts;
 
-import Bank.*;
+import Banks.*;
+import Main.Field;
+import Main.FieldValidator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -28,9 +30,9 @@ public class AccountLauncher {
         }
 
         // Prompt for account credentials
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter AccountNumber: ");
-        String accountNumber = scanner.next();
+        Field<String, String> accountNumberField = new Field<>("Account Number", String.class, "", new Field.StringFieldValidator());
+        accountNumberField.setFieldValue("Enter Account Number: ");
+        String accountNumber = accountNumberField.getFieldValue();
 
         // Check if the account exists in the selected bank
         Account account = selectedBank.getBankAccount(assocBank, accountNumber);
@@ -44,19 +46,9 @@ public class AccountLauncher {
     }
 
     private Bank selectBank() {
-
-        int id;
-        while (true) { 
-            try {
-                Scanner scanner = new Scanner(System.in);
-                System.out.print("Enter ID to select a Bank: ");
-                id = scanner.nextInt();
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input. Please enter a valid ID.");
-            }
-           
-        }
+        Field<Integer, Integer> bankIdField = new Field<>("Bank ID", Integer.class, 1, new Field.IntegerFieldValidator());
+        bankIdField.setFieldValue("Enter ID to select a Bank: ");
+        int id = bankIdField.getFieldValue();
 
         for (Account account : this.assocBank.getBankAccounts()) {
             Bank bank = account.getBANK();
@@ -64,7 +56,6 @@ public class AccountLauncher {
                 return bank;
             }
         }
-
         return null;
     }
 
