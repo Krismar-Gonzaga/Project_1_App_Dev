@@ -20,8 +20,7 @@ public class Main
     public static Field<Integer, Integer> option = new Field<Integer, Integer>("Option",
             Integer.class, -1, new Field.IntegerFieldValidator());
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IllegalAccountType {
         while (true)
         {
             showMenuHeader("Main Menu");

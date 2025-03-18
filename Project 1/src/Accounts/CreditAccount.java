@@ -54,7 +54,7 @@ public class CreditAccount extends Account implements Payment, Recompense {
 
     // Implement pay (loan repayment from another account)
     @Override
-    public boolean pay(Account account, double amount) {
+    public boolean pay(Account account, double amount )throws IllegalAccountType {
         if (account instanceof SavingsAccount) {
             SavingsAccount savings = (SavingsAccount) account;
 
@@ -69,8 +69,7 @@ public class CreditAccount extends Account implements Payment, Recompense {
             return true;
         }
 
-        System.out.println("Invalid account type for payment.");
-        return false;
+        throw new IllegalAccountType("Invalid accont type for payment");
 
     }
 

@@ -12,7 +12,7 @@ public class CreditAccountLauncher extends AccountLauncher {
      * Method that deals with all things about credit accounts. Mainly utilized for showing the main
      * menu after Credit Account users log in to the application.
      */
-    public void creditAccountInit() {
+    public void creditAccountInit() throws IllegalAccountType {
         CreditAccount acc =getLoggedAccount();
         if (acc != null){
 //            System.out.println("Credit Account Initialized: " + acc.getACCOUNTNUMBER());
@@ -56,7 +56,7 @@ public class CreditAccountLauncher extends AccountLauncher {
         }
     }
     
-    public void creditRepaymentProcess() {
+    public void creditRepaymentProcess() throws IllegalAccountType {
         // Implementation pending
         CreditAccount acc = getLoggedAccount();
         if (acc != null) {
