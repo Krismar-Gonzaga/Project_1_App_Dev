@@ -7,9 +7,9 @@ public class CreditAccount extends Account implements Payment, Recompense {
 
     // Constructor
     public CreditAccount(Bank bank, String accountNumber, String ownerFName, String ownerLName, String ownerEmail,
-                         String pin, double loan) {
+                         String pin) {
         super(bank, accountNumber, ownerFName, ownerLName, ownerEmail, pin);
-        this.loan = loan;
+        this.loan = 0.0;
     }
 
     // Get loan statement

@@ -177,7 +177,7 @@ public class Bank {
         String email = newAccount.get(3);
         String pin = newAccount.get(4);
 
-        CreditAccount newCreditAccount = new CreditAccount(this, accountNumber, Fname, Lname, email, pin, 0.0);
+        CreditAccount newCreditAccount = new CreditAccount(this, accountNumber, Fname, Lname, email, pin);
         BANKACCOUNTS.add(newCreditAccount);
         System.out.println("New Credit Account created successfully!");
         return newCreditAccount;
