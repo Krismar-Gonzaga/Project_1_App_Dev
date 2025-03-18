@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="49ad17fc-7d8d-48c9-af5f-be46015c420c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/AccountLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/AccountLauncher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/CreditAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/CreditAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/CreditAccountLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/CreditAccountLauncher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/Deposit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/Deposit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/FundTransfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/FundTransfer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/IllegalAccountType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/IllegalAccountType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/Recompense.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/Recompense.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/SavingsAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/SavingsAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/SavingsAccountLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/SavingsAccountLauncher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Accounts/Withdrawal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/Withdrawal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bank/Bank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bank/BankLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bank/BankLauncher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Field.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/FieldValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/FieldValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -10,6 +32,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="debugging-main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -35,17 +62,23 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Utilize-Field",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/2nd year 2nd sem/App dev/Projects/Project_1_App_Dev",
-    "project.structure.last.edited": "Project",
+    "last_opened_file_path": "C:/Banksystem/Project_1_App_Dev/Project 1",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Banksystem\Project_1_App_Dev\Project 1\src" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

@@ -68,7 +68,9 @@ public abstract class Account {
         }
         return info.toString();
     }
-
+    public Bank getBank(){
+        return BANK;
+    }
     // toString method
     @Override
     public String toString() {
