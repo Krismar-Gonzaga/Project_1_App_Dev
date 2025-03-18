@@ -1,5 +1,5 @@
 package Bank;
-import Main.Main;
+import Main.*;
 
 import Accounts.*;
 
@@ -123,20 +123,38 @@ public class BankLauncher {
     }
 
     public static void bankLogin() {
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter Bank Name: ");
-        String name = input.nextLine();
-        System.out.print("Enter Passcode: ");
-        String passcode = input.nextLine();
-        for (Bank bank : BANKS) {
-            //if(bank.toString().contains(name) && bank.toString().contains(passcode)) altered
-            if (bank.getName().equals(name) && bank.getPasscode().equals(passcode)) {
-                setLogSession(bank);
-                System.out.println("Logged in to bank: " + name);
-                return;
+        try{
+            Field <String, String> nameField = new Field<> (
+                "Bank Name",
+                String.class,
+                " ",
+                new Field.StringFieldValidator()
+            );
+            
+            Field <String, Integer> passcodeField = new Field<> (
+                "Passcode",
+                String.class,
+                4,
+                new Field.StringFieldLengthValidator()
+            );
+
+            nameField.setFieldValue("Enter Bank Name: ", false);
+            passcodeField.setFieldValue("Enter Passcode: ", false);
+
+            String enteredName = nameField.getFieldValue();
+            String enteredPasscode = passcodeField.getFieldValue();
+
+            for (Bank bank: BANKS){
+                if (bank.getName().equals(enteredName) && bank.getPasscode().equals(enteredPasscode)){
+                    setLogSession(bank);
+                    System.out.println("Logged in successfully.");
+                    return;
+                }
             }
+            System.out.println("Invalid bank credentials.");
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter correct values.");
         }
-        System.out.println("Invalid bank credentials.");
     }
 
     private static void setLogSession(Bank b) {
@@ -149,18 +167,34 @@ public class BankLauncher {
     }
 
     public static void createNewBank() {
-        Scanner input = new Scanner(System.in);
+        Field <Integer, Integer> idField = new Field<>(
+                "Bank ID",
+                Integer.class,
+                1,
+                new Field.IntegerFieldValidator()
+        );
+
+        Field <String, String> nameField = new Field<> (
+            "Bank Name",
+            String.class,
+            " ",
+            new Field.StringFieldValidator()
+        );
+
+        Field <String, Integer> passcodeField = new Field<> (
+            "Passcode",
+            String.class,
+            4,
+            new Field.StringFieldLengthValidator()
+        );
         try {
-            System.out.print("Enter Bank ID: ");
-            int ID = input.nextInt();
-            input.nextLine();
-            System.out.print("Enter Bank Name: ");
-            String name = input.nextLine();
-            System.out.print("Enter Passcode: ");
-            String passcode = input.nextLine();
-            Bank newBank = new Bank(ID, name, passcode);
+            idField.setFieldValue("Enter Bank ID: ", true);
+            nameField.setFieldValue("Enter Bank ID: ", false);
+            passcodeField.setFieldValue("Enter Bank ID: ", false);
+
+            Bank newBank = new Bank(idField.getFieldValue(), nameField.getFieldValue(), passcodeField.getFieldValue());
             addBank(newBank);
-            System.out.println("New bank created successfully.");
+            System.out.println("Bank created successfully.");
         } catch (NumberFormatException e) {
             System.out.println("Invalid input. Please enter correct values.");
         }

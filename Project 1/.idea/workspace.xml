@@ -4,27 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49ad17fc-7d8d-48c9-af5f-be46015c420c" name="Changes" comment="">
+    <list default="true" id="49ad17fc-7d8d-48c9-af5f-be46015c420c" name="Changes" comment="removed loan">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Accounts/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Accounts/AccountLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/AccountLauncher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Accounts/CreditAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/CreditAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Accounts/CreditAccountLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/CreditAccountLauncher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Accounts/Deposit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/Deposit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Accounts/FundTransfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/FundTransfer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Accounts/IllegalAccountType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/IllegalAccountType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Accounts/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Accounts/Recompense.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/Recompense.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Accounts/SavingsAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/SavingsAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Accounts/SavingsAccountLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/SavingsAccountLauncher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Accounts/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Accounts/Withdrawal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Accounts/Withdrawal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bank/Bank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bank/BankLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bank/BankLauncher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Field.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Field.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/FieldValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/FieldValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Bank/BankLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bank/BankLauncher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +45,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.TestBank.executor": "Run",
+    "JUnit.TestCredit.executor": "Run",
+    "JUnit.TestSavings.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "Utilize-Field",
@@ -79,6 +68,74 @@
       <recent name="C:\Banksystem\Project_1_App_Dev\Project 1\src" />
     </key>
   </component>
+  <component name="RunManager" selected="JUnit.TestBank">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main.Main" />
+      <module name="Project 1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestBank" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project 1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.TestBank" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestCredit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project 1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.TestCredit" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSavings" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project 1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.TestSavings" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.TestBank" />
+        <item itemvalue="JUnit.TestCredit" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.TestSavings" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -88,6 +145,37 @@
       <option name="presentableId" value="Default" />
       <updated>1740553593796</updated>
     </task>
+    <task id="LOCAL-00001" summary="modified the structure of the code">
+      <option name="closed" value="true" />
+      <created>1742263336573</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742263336573</updated>
+    </task>
+    <task id="LOCAL-00002" summary="utilized throw illegalAccounttype">
+      <option name="closed" value="true" />
+      <created>1742263528191</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1742263528191</updated>
+    </task>
+    <task id="LOCAL-00003" summary="removed loan">
+      <option name="closed" value="true" />
+      <created>1742263609928</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742263609928</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="modified the structure of the code" />
+    <MESSAGE value="utilized throw illegalAccounttype" />
+    <MESSAGE value="removed loan" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed loan" />
   </component>
 </project>
