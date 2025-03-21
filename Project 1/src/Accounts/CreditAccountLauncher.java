@@ -5,7 +5,7 @@ public class CreditAccountLauncher {
 
     private static CreditAccount loggedAccount;
 
-    public static void creditAccountInit() {
+    public static void creditAccountInit() throws IllegalAccountType {
         if (loggedAccount == null) {
             System.out.println("No account logged in.");
             return;
@@ -29,7 +29,7 @@ public class CreditAccountLauncher {
         }
     }
 
-    public static void creditPaymentProcess() {
+    public static void creditPaymentProcess() throws IllegalAccountType {
         Field<String, Integer> receiver = new Field<String, Integer>("Recipient Account Number", String.class, 5, new Field.StringFieldLengthValidator());
         receiver.setFieldValue("Enter Recipient Account number: ");
         String receiverAccNum = receiver.getFieldValue();
