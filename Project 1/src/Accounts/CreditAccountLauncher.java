@@ -66,4 +66,7 @@ public class CreditAccountLauncher {
     public static CreditAccount getLoggedAccount() {
         return loggedAccount;
     }
+
+    public void accountLogin() {
+    }
 }

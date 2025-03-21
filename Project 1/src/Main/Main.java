@@ -44,13 +44,13 @@ public class Main
                         Account acc = BankLauncher.findAccount(accountNum);
                         if(acc != null && acc.getPin().equals(pin)){
                             if (acc instanceof SavingsAccount){
-                                SavingsAccountLauncher launcher = new SavingsAccountLauncher(acc.getBANK(),acc);
+                                SavingsAccountLauncher launcher = new SavingsAccountLauncher();
                                 launcher.accountLogin();
                                 showMenu(51,1);
                                 setOption();
                             }
                             else if(acc instanceof CreditAccount){
-                                CreditAccountLauncher launcher = new CreditAccountLauncher(acc.getBANK(), acc);
+                                CreditAccountLauncher launcher = new CreditAccountLauncher();
                                 launcher.accountLogin();
                                 launcher.creditAccountInit();
                         }
