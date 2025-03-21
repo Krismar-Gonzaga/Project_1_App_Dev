@@ -1,92 +1,69 @@
 package Accounts;
-import Bank.*;
-import Main.Main;
-import java.util.Scanner;
+import Main.*;
 
-public class CreditAccountLauncher extends AccountLauncher {
-    public CreditAccountLauncher(Bank bank, Account account) {
-        super(bank, account);
-    }
-    
-    /**
-     * Method that deals with all things about credit accounts. Mainly utilized for showing the main
-     * menu after Credit Account users log in to the application.
-     */
-    public void creditAccountInit() throws IllegalAccountType {
-        CreditAccount acc =getLoggedAccount();
-        if (acc != null){
-//            System.out.println("Credit Account Initialized: " + acc.getACCOUNTNUMBER());
+public class CreditAccountLauncher {
 
-            System.out.println("\n--- Credit Account Dashboard ---");
-            System.out.println("Account Number: " + acc.getACCOUNTNUMBER());
-            System.out.println("Outstanding Loan: " + acc.getLoanStatement());
+    private static CreditAccount loggedAccount;
 
-            boolean stayInMenu = true;
+    public static void creditAccountInit() {
+        if (loggedAccount == null) {
+            System.out.println("No account logged in.");
+            return;
+        }
 
-            while (stayInMenu){
+        while (true) {
+            Main.showMenuHeader("Credit Account Menu");
+            Main.showMenu(41);
+            Main.setOption();
 
-                Main.showMenuHeader("Credit Account Menu");
-                Main.showMenu(41,1);
-                Main.setOption();
-
-                switch(Main.getOption()){
-                    case 1:
-                        System.out.println(acc.getLoanStatement());
-                        break;
-                    case 2:
-                        creditRepaymentProcess();
-                        break;
-                    case 3:
-                        creditRecompenseProcess();
-                        break;
-                    case 4:
-                        System.out.println(acc.getTransactionsInfo());
-                        break;
-                    case 5:
-                        stayInMenu = false;
-                        System.out.println("Logging out from Account...");
-                        break;
-                    default:
-                        System.out.print("Invalid choice");
-
+            switch (Main.getOption()) {
+                case 1 -> System.out.println(loggedAccount.getLoanStatement());
+                case 2 -> creditPaymentProcess();
+                case 3 -> creditRecompenseProcess();
+                case 4 -> System.out.println(loggedAccount.getTransactionsInfo());
+                case 5 -> {
+                    return;
                 }
-            }
-        } else{
-            System.out.print("No credit account login");
-        }
-    }
-    
-    public void creditRepaymentProcess() throws IllegalAccountType {
-        // Implementation pending
-        CreditAccount acc = getLoggedAccount();
-        if (acc != null) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter target account number: ");
-            String targetAccountNum = scanner.nextLine();
-            System.out.print("Enter amount: ");
-            double amount = scanner.nextDouble();
-
-            Account targetAccount = BankLauncher.findAccount(targetAccountNum);
-            if (targetAccount != null) {
-                acc.pay(targetAccount, amount);
-            } else {
-                System.out.println("Target account not found.");
+                default -> System.out.println("Invalid option. Try again.");
             }
         }
     }
-  
-    public void creditRecompenseProcess() {
-        CreditAccount acc = getLoggedAccount();
-        if(acc != null) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter repayment amount: ");
-            double amount = scanner.nextDouble();
-            acc.recompense(amount);
+
+    public static void creditPaymentProcess() {
+        Field<String, Integer> receiver = new Field<String, Integer>("Recipient Account Number", String.class, 5, new Field.StringFieldLengthValidator());
+        receiver.setFieldValue("Enter Recipient Account number: ");
+        String receiverAccNum = receiver.getFieldValue();
+
+        Field<Double, Double> paymentAmount = new Field<Double, Double>("Payment Amount", Double.class, 1.0, new Field.DoubleFieldValidator());
+        paymentAmount.setFieldValue("Enter Payment Amount ");
+        double amount = paymentAmount.getFieldValue();
+
+        Account recipientAccount = loggedAccount.getBank().getBankAccount(receiverAccNum);
+
+        if (!(recipientAccount instanceof SavingsAccount)) {
+            System.out.println("Account not Found!");
+            return;
         }
+        System.out.println(loggedAccount.pay(recipientAccount, amount)
+                ? "Credit payment successful."
+                : "Credit payment failed. Insufficient funds or invalid amount.");
     }
 
-    @Override
-    protected CreditAccount getLoggedAccount() {
-       return (CreditAccount)   super.getLoggedAccount();
+    public static void creditRecompenseProcess() {
+        Field<Double, Double> recompenseAmount = new Field<Double, Double>("Recompense Amount", Double.class, 1.0, new Field.DoubleFieldValidator());
+        recompenseAmount.setFieldValue("Enter recompense amount: ");
+        double amount = recompenseAmount.getFieldValue();
+
+        System.out.println(loggedAccount.recompense(amount)
+                ? "Recompense successful."
+                : "Recompense failed. Amount exceeds loan balance.");
+    }
+
+    public static void setLoggedAccount(CreditAccount account) {
+        loggedAccount = account;
+    }
+
+    public static CreditAccount getLoggedAccount() {
+        return loggedAccount;
     }
 }
