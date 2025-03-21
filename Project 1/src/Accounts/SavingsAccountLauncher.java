@@ -1,164 +1,132 @@
 package Accounts;
-import Bank.*;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
-/**
- * Class for launching savings account-related operations.
- */
-public class SavingsAccountLauncher extends AccountLauncher {
-    
-    private Bank bank;
-    Scanner scanner = new Scanner(System.in);
-    /**
-     * Constructor for SavingsAccountLauncher.
-     *
-     * @param bank The bank associated with this launcher.
-     */
+import Bank.BankLauncher;
+import Bank.Bank;
+import Main.*;
 
-    public SavingsAccountLauncher(Bank bank, Account account) {
-        super(bank, account);
-        this.bank = bank;
-       
-    }
-    
+public class SavingsAccountLauncher {
 
-    /**
-     *depositProcess() 
-    A method that deals with the deposit process transaction.
-     */
+    private static SavingsAccount loggedAccount;
 
-    
-    private void depositProcess() {
-        System.out.print("Enter account number: ");
-        String accountNumber = scanner.nextLine();
+    public static void savingsAccountInit() throws IllegalAccountType {
+        if (loggedAccount == null) {
+            System.out.println("Error: No active session detected.");
+            return;
+        }
 
-        System.out.print("Enter amount to deposit: ");
-        double amount;
         while (true) {
-            try {
-                amount = scanner.nextDouble();
-                break;
-            } catch (InputMismatchException e) {
-                System.out.print("Invalid amount. Please enter a valid number: ");
-                scanner.nextLine();
-                continue;
-            }
-        }
+            Main.showMenuHeader("Savings Account Dashboard");
+            Main.showMenu(51);
+            Main.setOption();
 
-        Account account = this.bank.getBankAccount(this.bank, accountNumber);
-        if (account != null) {
-            if (account instanceof SavingsAccount savingsAccount) {
-                getLoggedAccount().cashDeposit(amount);
-                System.out.println("Deposit successful.");
-            } else {
-                System.out.println("Invalid account type.");
+            int choice = Main.getOption();
+            switch (choice) {
+                case 1:
+                    System.out.println("Account Balance: " + loggedAccount.getAccountBalanceStatement());
+                    break;
+                case 2:
+                    depositProcess();
+                    break;
+                case 3:
+                    withdrawProcess();
+                    break;
+                case 4:
+                    fundTransfer();
+                    break;
+                case 5:
+                    System.out.println("Transaction History:\n" + loggedAccount.getTransactionsInfo());
+                    break;
+                case 6:
+                    System.out.println("Logging out...");
+                    return;
+                default:
+                    System.out.println("Invalid selection. Enter a valid option.");
             }
-        } else {
-            System.out.println("Account not found.");
         }
     }
+    
+    public static void depositProcess() {
+        System.out.print("Enter deposit amount: ");
+        Field<Double, Double> deposit = new Field<Double, Double>("Deposit Amount", Double.class, 1.0, new Field.DoubleFieldValidator());
+        deposit.setFieldValue("Enter Deposit Amount: ");
 
-    /*
-     * withdrawProcess() 
-     * A method that deals 
-     * with the withdrawal 
-     * process transaction. 
-     */
-    private void withdrawProcess() {
+        double depositAmount = deposit.getFieldValue();
+        boolean success = loggedAccount.cashDeposit(depositAmount);
+        System.out.println(success ? "Deposit successful." : "Deposit failed. Verify amount and try again.");
+    }
+    
+    public static void withdrawProcess() {
+        System.out.print("Enter withdrawal amount: ");
+        Field<Double, Double> withdrawal = new Field<Double, Double>("Withdrawal Amount", Double.class, 1.0, new Field.DoubleFieldValidator());
+        withdrawal.setFieldValue("Enter Withdrawal Amount");
 
-        String accountNumber;
-        while (true) {
-            try {
-                System.out.print("Enter account number: ");
-                accountNumber = scanner.nextLine();
-                break;
-            } catch (InputMismatchException e) {
-                System.out.print("Invalid account number. Please enter a valid number: ");
-                scanner.nextLine();
-                continue;
-            }
+        double withdrawalAmount = withdrawal.getFieldValue();
+        boolean success = loggedAccount.withdrawal(withdrawalAmount);
+        System.out.println(success ? "Withdrawal successful." : "Withdrawal failed. Insufficient funds or limit exceeded.");
+    }
+    
+    public static void fundTransfer() throws IllegalAccountType {
+        if (loggedAccount == null) {
+            System.out.println("No active account session.");
+            return;
         }
 
-        System.out.print("Enter amount to withdraw: ");
-        double amount;
-        while (true) {
-            try {
-                amount = scanner.nextDouble();
-                break;
-            } catch (InputMismatchException e) {
-                System.out.print("Invalid amount. Please enter a valid number: ");
-                scanner.nextLine();
-                continue;
-            }
-        }
+        Main.showMenuHeader("Select Transfer Type");
+        System.out.println("[1] Internal Transfer\n[2] External Transfer");
+        Main.setOption();
+        int transferType = Main.getOption();
 
-        Account account = this.bank.getBankAccount(this.bank, accountNumber);
-        if (account != null) {
-            if (account instanceof SavingsAccount savingsAccount) {
-                if (savingsAccount.hasEnoughBalance(amount)) {
-                    getLoggedAccount().withdrawal(amount);
-                    System.out.println("Withdrawal successful.");
-                } else {
-                    System.out.println("Insufficient funds.");
-                }
-            } else {
-                System.out.println("Invalid account type.");
+        Field<String, Integer> recipientAccount = new Field<String, Integer>("Recipient Account", String.class, 5, new Field.StringFieldLengthValidator());
+        recipientAccount.setFieldValue("Enter Recipient Account Number: ");
+        String recipientAccountNum = recipientAccount.getFieldValue();
+
+        Field<Double, Double> transferAmount = new Field<Double, Double>("Transfer Amount", Double.class, 1.0, new Field.DoubleFieldValidator());
+        transferAmount.setFieldValue("Enter Transfer Amount:");
+        double amount = transferAmount.getFieldValue();
+
+        if (transferType == 1) {
+            Account recipient = loggedAccount.getBank().getBankAccount(recipientAccountNum);
+
+            if (!(recipient instanceof SavingsAccount)) {
+                System.out.println("Error: Invalid recipient account.");
+                return;
             }
+
+            boolean success = loggedAccount.transfer(recipient, amount);
+            System.out.println(success ? "Transfer successful." : "Transfer failed. Insufficient funds or exceeded limit.");
+        } else if (transferType == 2) {
+            Field<Integer, Integer> bankID = new Field<Integer, Integer>("Recipient Bank ID", Integer.class, 1, new Field.IntegerFieldValidator());
+            bankID.setFieldValue("Enter recipient Bank ID");
+            int bankId = bankID.getFieldValue();
+
+            Bank recipientBank = BankLauncher.getBanks().stream()
+                    .filter(bank -> bank.getId() == bankId)
+                    .findFirst()
+                    .orElse(null);
+
+            if (recipientBank == null) {
+                System.out.println("Error: Bank not found.");
+                return;
+            }
+
+            Account recipient = recipientBank.getBankAccount(recipientAccountNum);
+            if (!(recipient instanceof SavingsAccount)) {
+                System.out.println("Error: Invalid recipient account.");
+                return;
+            }
+
+            boolean success = loggedAccount.transfer(recipientBank, recipient, amount);
+            System.out.println(success ? "Transfer completed with a processing fee of " + loggedAccount.getBank().getProcessingFee() : "Transfer unsuccessful. Verify details and retry.");
         } else {
-            System.out.println("Account not found.");
+            System.out.println("Invalid transfer option selected.");
         }
     }
-
-    /*
-     *fundTransferProcess() 
-        A method that deals 
-        with the fund 
-        transfer process transaction. 
-     */
-    private void fundTransferProcess() {
-        // Implementation pending
-        
-        System.out.println("Enter the account number to transfer to: ");
-        String accountNumber = scanner.nextLine();
-        System.out.println("Enter the amount to transfer: ");
-        double amount = scanner.nextDouble();
-
-        Account account = bank.getBankAccount(this.bank,accountNumber);
-        if (account != null) {
-            if (account instanceof SavingsAccount savingsAccount) {
-                if (getLoggedAccount().hasEnoughBalance(amount)) {
-                    try {
-                        getLoggedAccount().transfer(savingsAccount, amount);
-                    } catch (IllegalAccountType e) {
-                        System.out.println("Transfer failed: " + e.getMessage());
-                    }
-                    System.out.println("Transfer successful.");
-                } else {
-                    System.out.println("Insufficient funds.");
-                }
-            } else {
-                System.out.println("Invalid account type.");
-            }
-        } else {
-            System.out.println("Account not found.");
-        }
+    
+    public static void setLoggedAccount(SavingsAccount account) {
+        loggedAccount = account;
     }
-
-    /*
-     * Get the Savings Account instance of the currently logged account.
-     */
-
     
     public SavingsAccount getLoggedAccount() {
-        
-        for (Account acc : bank.getBankAccounts()) {
-            if (acc instanceof SavingsAccount creditAccount) {
-                if (creditAccount.getACCOUNTNUMBER().equals(acc.getACCOUNTNUMBER())) {
-                    return creditAccount;
-                }
-            }
-        }
-        return null;
+        return loggedAccount;
     }
-    }
+}
