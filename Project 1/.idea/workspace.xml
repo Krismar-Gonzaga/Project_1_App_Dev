@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="49ad17fc-7d8d-48c9-af5f-be46015c420c" name="Changes" comment="removed loan">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bank/BankLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bank/BankLauncher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
