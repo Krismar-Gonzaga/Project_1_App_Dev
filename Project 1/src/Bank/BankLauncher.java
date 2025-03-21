@@ -20,82 +20,120 @@ public class BankLauncher {
     }
 
     public static void bankInit() {
-        while (isLogged()) {
-            Main.showMenuHeader("Bank System");
-            Main.showMenu(Menu.BankMenu.menuIdx);
-            int choice = Main.getOption();  // Store the option in a variable to debug
+        // Implement logic to initialize bank-related operations
+        while (true){
 
-            System.out.println("DEBUG: User selected option -> " + choice); // Debugging line
+            if (isLogged()) {
 
-            switch (choice) {
-                case 1 -> showAccounts();
-                case 2 -> newAccounts();
-                case 3 -> {
-                    logout();
-                    System.out.println("Exiting...");
-                    return;
+                Main.showMenuHeader("Bank Operation");
+                Main.showMenu(31);
+                Main.setOption();
+
+                switch (Main.getOption()){
+                    case 1:
+                        showAccounts();
+                        break;
+                    case 2:
+                        newAccounts();
+                        break;
+                    case 3:
+                        logout();
+                        break;
+                    default:
+                        System.out.println("Invalid input");
                 }
-                case -1 -> {
-                    System.out.println("Invalid choice. Exiting to prevent infinite loop.");
-                    logout();
-                    return;
-                }
-                default -> System.out.println("Invalid choice, please try again.");
+            }
+            else {
+                System.out.println("Please log in to a bank first.");
+                break;
             }
         }
     }
     public static void showAccounts() {
-        if (loggedBank == null) return;
+        while (true){
+            if (!isLogged()) {
+                System.out.println("Please log in to a bank first.");
+                break;
+            }
+            Main.showMenuHeader("Account Types");
+            Main.showMenu(32);
+            Main.setOption();
 
-        Main.showMenuHeader("Account Display");
-        Main.showMenu(Menu.ShowAccounts.menuIdx);
-        switch (Main.getOption()) {
-            case 1 -> loggedBank.showAccounts(CreditAccount.class);
-            case 2 -> loggedBank.showAccounts(SavingsAccount.class);
-            case 3 -> loggedBank.showAccounts(null);
-            default -> System.out.println("Invalid selection");
+            Class<?> accountType = null;
+
+            switch(Main.getOption()){
+                case 1:
+                    loggedBank.showAccounts(CreditAccount.class);
+                    break;
+                case 2:
+                    loggedBank.showAccounts(SavingsAccount.class);
+                    break;
+                case 3:
+                    loggedBank.showAccounts(Account.class);
+                    break;
+                default:
+                    System.out.println("Invalid choice.");
+                    break;
+            }
         }
     }
 
     public static void newAccounts() {
-        if (loggedBank == null) return;
+        if (!isLogged()) {
+            System.out.println("Please log in to a bank first.");
+            return;
+        }
 
-        Main.showMenuHeader("New Account Creation");
-        Main.showMenu(Menu.AccountTypeSelection.menuIdx);
+        Main.showMenuHeader("Account Type Selection");
+        Main.showMenu(33);
+        Main.setOption();
+
         switch (Main.getOption()) {
-            case 1 -> System.out.println("Created: " + loggedBank.createNewCreditAccount());
-            case 2 -> System.out.println("Created: " + loggedBank.createNewSavingsAccount());
-            default -> System.out.println("Invalid choice");
+            case 1:
+                loggedBank.createNewCreditAccount();
+                break;
+            case 2:
+                loggedBank.createNewSavingsAccount();
+                break;
+            default:
+                System.out.println("Invalid choice.");
         }
     }
 
     public static void bankLogin() {
-        if (banks.isEmpty()) {
-            System.out.println("No banks available");
-            return;
+        try{
+            Field <String, String> nameField = new Field<String, String> (
+                    "Bank Name",
+                    String.class,
+                    " ",
+                    new Field.StringFieldValidator()
+            );
+
+            Field <String, Integer> passcodeField = new Field<String, Integer> (
+                    "Passcode",
+                    String.class,
+                    4,
+                    new Field.StringFieldLengthValidator()
+            );
+
+            nameField.setFieldValue("Enter Bank Name: ", false);
+            passcodeField.setFieldValue("Enter Passcode: ", false);
+
+            String enteredName = nameField.getFieldValue();
+            String enteredPasscode = passcodeField.getFieldValue();
+
+            for (Bank bank: banks){
+                if (bank.getName().equals(enteredName) && bank.getPasscode().equals(enteredPasscode)){
+                    setLogSession(bank);
+                    System.out.println("Logged in successfully.");
+                    bankInit();
+                    return;
+                }
+            }
+            System.out.println("Invalid bank credentials.");
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter correct values.");
         }
-
-        showBanksMenu();
-        String nameInput = Main.prompt("Bank Name: ", false).trim();
-        Bank target = banks.stream()
-                .filter(b -> b.getName().equalsIgnoreCase(nameInput))
-                .findFirst()
-                .orElse(null);
-
-        if (target == null) {
-            System.out.println("Bank not found: " + nameInput);
-            return;
-        }
-
-        String codeInput = Main.prompt("Passcode: ", true).trim();
-        if (!target.getPasscode().equals(codeInput)) {
-            System.out.println("Wrong passcode");
-            return;
-        }
-
-        loggedBank = target;
-        System.out.println("Logged in: " + loggedBank.getName());
-        bankInit();
     }
 
 
@@ -194,11 +232,11 @@ public class BankLauncher {
         for (Bank bank : banks) {
             Account acc = bank.getBankAccount(accountNum);
             if (acc != null) {
-                System.out.println("DEBUG: Found account " + accountNum);
+                System.out.println("Found account " + accountNum);
                 return acc;
             }
         }
-        System.out.println("DEBUG: Account " + accountNum + " not found.");
+        System.out.println("Account " + accountNum + " not found.");
         return null;
     }
 
