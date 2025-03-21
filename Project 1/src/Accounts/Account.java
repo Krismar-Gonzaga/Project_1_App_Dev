@@ -3,80 +3,80 @@ package Accounts;
 import java.util.ArrayList;
 import Bank.Bank;
 
-// Abstract class Account
 public abstract class Account {
-    // Attributes
-    private Bank BANK;
-    private String ACCOUNTNUMBER;
-    private String OWNERFNAME;
-    private String OWNERLNAME;
-    private String OWNEREMAIL;
-    private String pin;
+    protected final Bank bank;
+    protected final String accountNumber;
+    protected final ArrayList<Transaction> transactions;
+    protected final String ownerFname, ownerLname, ownerEmail;
+    protected final String pin;  
 
-    private ArrayList<Transaction> TRANSACTION;
-
-    public Bank getBANK() {
-        return BANK;
-    }
-
-    public String getACCOUNTNUMBER() {
-        return ACCOUNTNUMBER;
-    }
     public String getOwnerFname() {
-        return OWNERFNAME;
+        return ownerFname;
     }
 
     public String getOwnerLname() {
-        return OWNERLNAME;
+        return ownerLname;
     }
 
     public String getOwnerEmail() {
-        return OWNEREMAIL;
+        return ownerEmail;
     }
 
     public String getPin() {
         return pin;
     }
 
+        public Bank getBank() {
+        return bank;
+    }
 
-    // Constructor
-    public Account(Bank BANK, String ACCOUNTNUMBER, String OWNERFNAME, String OWNERLNAME, String OWNEREMAIL, String pin) {
-        this.BANK = BANK;
-        this.ACCOUNTNUMBER = ACCOUNTNUMBER;
-        this.OWNERFNAME = OWNERFNAME;
-        this.OWNERLNAME = OWNERLNAME;
-        this.OWNEREMAIL = OWNEREMAIL;
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public ArrayList<Transaction> getTransactions() {
+        return new ArrayList<>(transactions);
+    }
+
+    public Account(Bank bank, String accountNumber, String pin, String ownerFname,
+                   String ownerLname, String ownerEmail) {
+        this.bank = bank;
+        this.accountNumber = accountNumber;
         this.pin = pin;
-        this.TRANSACTION = new ArrayList<>();
+        this.ownerFname = ownerFname;
+        this.ownerLname = ownerLname;
+        this.ownerEmail = ownerEmail;
+        this.transactions = new ArrayList<>();
     }
 
-    // Method to get owner's full name
-    public String getOwnerFullName() {
-        return this.OWNERFNAME + " " + this.OWNERLNAME;
+    public String getOwnerFullName()throws IllegalStateException{
+        return this.ownerFname + " " + this.ownerLname;
     }
 
-    // Method to add a new transaction
-    public void addNewTransaction(String accountNum, Transaction.Transactions type, String description) {
-        this.TRANSACTION.add(new Transaction(accountNum, type, description));
+    public void addNewTransaction(String sourceAccount, Transaction.Transactions type, String description) {
+        transactions.add(new Transaction(sourceAccount, type, description));
     }
 
-    // Method to get transaction info
     public String getTransactionsInfo() {
-        StringBuilder info = new StringBuilder("Transactions:\n");
-        for (Transaction t : this.TRANSACTION) {
-            info.append(t.toString()).append("\n");
+        if (transactions.isEmpty()) {
+            return "No transactions found for this account.";
         }
-        return info.toString();
+
+        StringBuilder transactionLog = new StringBuilder("Transaction History:\n");
+        for (Transaction transaction : transactions) {
+            transactionLog.append(transaction.toString()).append("\n");
+        }
+        return transactionLog.toString();
     }
-    public Bank getBank(){
-        return BANK;
-    }
-    // toString method
+
     @Override
     public String toString() {
-        return "Account Number: " + this.ACCOUNTNUMBER + "\n" +
-               "Owner: " + getOwnerFullName() + "\n" +
-               "Email: " + this.OWNEREMAIL + "\n" +
-               getTransactionsInfo();
+        return "Account {" +
+                "Owner='" + ownerFname + " " + ownerLname + '\'' +
+                ", Email='" + ownerEmail + '\'' +
+                ", Bank='" + bank.getName() + '\'' +
+                ", Account Number='" + accountNumber + '\'' +
+                ", Transactions Count=" + transactions.size() +
+                '}';
     }
 }
