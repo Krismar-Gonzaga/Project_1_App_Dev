@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49ad17fc-7d8d-48c9-af5f-be46015c420c" name="Changes" comment="removed loan">
+    <list default="true" id="49ad17fc-7d8d-48c9-af5f-be46015c420c" name="Changes" comment="modify main, CreditAccountLauncher">
+      <change beforePath="$PROJECT_DIR$/.idea/Project 1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Project 1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,8 +49,13 @@
     "Application.Main.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "JUnit.TestBank.executor": "Run",
+    "JUnit.TestBank.test1.executor": "Run",
+    "JUnit.TestBank.test2.executor": "Run",
     "JUnit.TestCredit.executor": "Run",
+    "JUnit.TestCredit.test1.executor": "Run",
     "JUnit.TestSavings.executor": "Run",
+    "JUnit.TestSavings.test1.executor": "Run",
+    "JUnit.TestSavings.test2.executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -67,7 +75,7 @@
       <recent name="C:\Banksystem\Project_1_App_Dev\Project 1\src" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestBank">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main.Main" />
       <module name="Project 1" />
@@ -81,7 +89,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestBank" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestBank.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project 1" />
       <extension name="coverage">
         <pattern>
@@ -91,12 +99,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="Tests" />
       <option name="MAIN_CLASS_NAME" value="Tests.TestBank" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="test1" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestCredit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestBank.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project 1" />
       <extension name="coverage">
         <pattern>
@@ -105,33 +114,40 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.TestCredit" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="Tests.TestBank" />
+      <option name="METHOD_NAME" value="test2" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestSavings" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestCredit.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Project 1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.TestSavings" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestCredit" />
+      <option name="METHOD_NAME" value="test1" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSavings.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Project 1" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestSavings" />
+      <option name="METHOD_NAME" value="test1" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestBank" />
-        <item itemvalue="JUnit.TestCredit" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.TestSavings" />
+        <item itemvalue="JUnit.TestSavings.test1" />
+        <item itemvalue="JUnit.TestCredit.test1" />
+        <item itemvalue="JUnit.TestBank.test2" />
+        <item itemvalue="JUnit.TestBank.test1" />
       </list>
     </recent_temporary>
   </component>
@@ -168,13 +184,68 @@
       <option name="project" value="LOCAL" />
       <updated>1742263609928</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added test files">
+      <option name="closed" value="true" />
+      <created>1742564986999</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742564986999</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added test files">
+      <option name="closed" value="true" />
+      <created>1742565047132</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742565047132</updated>
+    </task>
+    <task id="LOCAL-00006" summary="modified creditaccount">
+      <option name="closed" value="true" />
+      <created>1742566820368</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742566820368</updated>
+    </task>
+    <task id="LOCAL-00007" summary="throws IllegalAccountType">
+      <option name="closed" value="true" />
+      <created>1742567895368</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742567895368</updated>
+    </task>
+    <task id="LOCAL-00008" summary="modify main, CreditAccountLauncher">
+      <option name="closed" value="true" />
+      <created>1742568450926</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1742568450926</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="modified the structure of the code" />
     <MESSAGE value="utilized throw illegalAccounttype" />
     <MESSAGE value="removed loan" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed loan" />
+    <MESSAGE value="added test files" />
+    <MESSAGE value="modified creditaccount" />
+    <MESSAGE value="throws IllegalAccountType" />
+    <MESSAGE value="modify main, CreditAccountLauncher" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify main, CreditAccountLauncher" />
   </component>
 </project>

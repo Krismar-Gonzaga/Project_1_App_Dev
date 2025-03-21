@@ -38,23 +38,18 @@ public class Main
                 showMenu(getOption(), 1);
                 // TODO: Complete this portion
                 if (getOption() ==1 ){
-                        String accountNum = Main.prompt("Enter Account Number: ", true);
-                        String pin = Main.prompt("Enter PIN: ",true);
 
-                        Account acc = BankLauncher.findAccount(accountNum);
-                        if(acc != null && acc.getPin().equals(pin)){
-                            if (acc instanceof SavingsAccount){
-                                SavingsAccountLauncher launcher = new SavingsAccountLauncher();
-                                launcher.accountLogin();
-                                showMenu(51,1);
-                                setOption();
-                            }
-                            else if(acc instanceof CreditAccount){
-                                CreditAccountLauncher launcher = new CreditAccountLauncher();
-                                launcher.accountLogin();
-                                launcher.creditAccountInit();
-                        }
+                    Bank selectedBank = AccountLauncher.selectBank();
+
+                    if (selectedBank == null) {
+                        System.out.println("Invalid bank selection.");
+                        return;
                     }
+
+                    AccountLauncher accountLauncher = new AccountLauncher();
+                    accountLauncher.setAssocBank(selectedBank);
+                    accountLauncher.accountLogin();
+
                 }
 
             }
