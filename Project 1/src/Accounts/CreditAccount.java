@@ -19,7 +19,7 @@ public class CreditAccount extends Account implements Payment, Recompense {
 
     // Check if credit adjustment is within limit
     public boolean canCredit(double amountAdjustment) {
-        double creditLimit = this.getBANK().getCreditLimit();
+        double creditLimit = bank.getCreditLimit();
         return (loan + amountAdjustment >= 0) && (loan + amountAdjustment <= creditLimit);
     }
 
