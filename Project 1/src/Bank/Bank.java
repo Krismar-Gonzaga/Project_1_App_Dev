@@ -1,41 +1,28 @@
 package Bank;
 
-import Accounts.*;
-import java.util.*;
-
+import Accounts.Account;
+import Accounts.CreditAccount;
+import Accounts.SavingsAccount;
+import Main.Field;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Bank {
-    private int ID;
-    private String name, passcode;
-    private double DEPOSITLIMIT = 50000.0;
-    private double WITHDRAWLIMIT = 50000.0;
-    private double CREDITLIMIT = 100000.0;
-    private double processingFee = 10.0;
-    private final ArrayList<Account> BANKACCOUNTS;
+    private String bankName, passcode;
+    private final int iD;
+    private final ArrayList<Account> bankAccounts = new ArrayList<>();
+    private final double depositLimit, withdrawLimit, creditLimit;
+    private double processingFee;
 
-    public Bank(int ID, String name, String passcode) {
-        this.ID = ID;
-        this.name = name;
-        this.passcode = passcode;
-        this.BANKACCOUNTS = new ArrayList<>();
+    public ArrayList<Account> getBankAccounts() {
+        return new ArrayList<>(bankAccounts);
     }
-
-    public Bank(int ID, String name, String passcode, double DEPOSITLIMIT, double WITHDRAWLIMIT, double CREDITLIMIT,
-            double processingFee) {
-        this(ID, name, passcode);
-        this.DEPOSITLIMIT = DEPOSITLIMIT;
-        this.WITHDRAWLIMIT = WITHDRAWLIMIT;
-        this.CREDITLIMIT = CREDITLIMIT;
-        this.processingFee = processingFee;
-    }
-
-    // Getters
-    public int getID() {
-        return ID;
-    }
-
     public String getName() {
-        return name;
+        return bankName;
+    }
+
+    public int getId() {
+        return iD;
     }
 
     public String getPasscode() {
@@ -43,249 +30,131 @@ public class Bank {
     }
 
     public double getDepositLimit() {
-        return DEPOSITLIMIT;
+        return depositLimit;
     }
 
     public double getWithdrawLimit() {
-        return WITHDRAWLIMIT;
+        return withdrawLimit;
     }
 
     public double getCreditLimit() {
-        return CREDITLIMIT;
+        return creditLimit;
     }
 
     public double getProcessingFee() {
         return processingFee;
     }
 
-    public ArrayList<Account> getBankAccounts() {
-        return this.BANKACCOUNTS;
+    public Bank(int iD, String bankName, String passcode) {
+        this(iD, bankName, passcode, 50000.0, 50000.0, 100000.0, 10.0);
     }
 
-    // Setters
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPasscode(String passcode) {
+    public Bank(int iD, String bankName, String passcode, double depositLimit, double withdrawLimit, double creditLimit, double processingFee) {
+        this.iD = iD;
+        this.bankName = bankName;
         this.passcode = passcode;
-    }
-
-    public void setDepositLimit(double DEPOSITLIMIT) {
-        this.DEPOSITLIMIT = DEPOSITLIMIT;
-    }
-
-    public void setWithdrawLimit(double WITHDRAWLIMIT) {
-        this.WITHDRAWLIMIT = WITHDRAWLIMIT;
-    }
-
-    public void setCreditLimit(double CREDITLIMIT) {
-        this.CREDITLIMIT = CREDITLIMIT;
-    }
-
-    public void setProcessingFee(double processingFee) {
+        this.depositLimit = depositLimit;
+        this.withdrawLimit = withdrawLimit;
+        this.creditLimit = creditLimit;
         this.processingFee = processingFee;
     }
 
-    /**
-     * Displays all accounts of a specific type stored in the bank.
-     *
-     * @param accountType The class type of the accounts to be displayed (e.g.,
-     *                    SavingsAccount.class).
-     * @param <T>         The generic type representing the account type.
-     */
-    public <T> void showAccounts(Class<T> accountType) {
-        if (accountType != null){
-
-        for (Account account : BANKACCOUNTS) {
-            if (accountType.isInstance(account)) {
+    public void showAccounts(Class<? extends Account> accountType) {
+        for (Account account : bankAccounts) {
+            if (accountType == null || accountType.isInstance(account)) {
                 System.out.println(account);
-                }
             }
         }
-        else{
-            System.out.print("No accounts available.");
+    }
+
+    public Account getBankAccount(String accountNum) {
+        return bankAccounts.stream().filter(acc -> acc.getAccountNumber().equals(accountNum)).findFirst().orElse(null);
+    }
+
+    private Account createNewAccount(Class<? extends Account> accountType) {
+        Field<String, Integer> accountNumber = new Field<String, Integer>("Account Number", String.class, 5, new Field.StringFieldLengthValidator());
+        accountNumber.setFieldValue("Enter Account Number: ");
+
+        Field<String, Integer> pin = new Field<String, Integer>("PIN", String.class, 3, new Field.StringFieldLengthValidator());
+        pin.setFieldValue("Enter PIN: ");
+
+        Field<String, String> fname = new Field<String, String>("First Name", String.class, null, new Field.StringFieldValidator());
+        fname.setFieldValue("Enter First Name: ");
+
+        Field<String, String> lname = new Field<String, String>("Last Name", String.class, null, new Field.StringFieldValidator());
+        lname.setFieldValue("Enter Last Name: ");
+
+        Field<String, String> email = new Field<String, String>("Email", String.class, null, new Field.StringFieldValidator());
+        email.setFieldValue("Enter Email: ");
+
+        Account account;
+        if (accountType.equals(SavingsAccount.class)) {
+            Field<Double, Double> balance = new Field<Double, Double>("Initial Deposit", Double.class, 0.0, new Field.DoubleFieldValidator());
+            balance.setFieldValue("Enter Initial Deposit: ");
+            account = new SavingsAccount(this, accountNumber.getFieldValue(), pin.getFieldValue(), fname.getFieldValue(), lname.getFieldValue(), email.getFieldValue(), balance.getFieldValue());
+        } else {
+            account = new CreditAccount(this, accountNumber.getFieldValue(), pin.getFieldValue(), fname.getFieldValue(), lname.getFieldValue(), email.getFieldValue());
         }
+        addNewAccount(account);
+        return account;
     }
-
-    /*
-     * Returns the bank account with the specified account number.
-     * 
-     * @param bank The bank to search for the account.
-     * 
-     * @param AccountNum The account number of the account to be returned.
-     * 
-     * @return The account with the specified account number.
-     */
-
-    public Account getBankAccount(Bank bank, String AccountNum) {
-        for (Account account : bank.BANKACCOUNTS) {
-            if (account.getACCOUNTNUMBER().equals(AccountNum)) {
-                return account;
-            }
-        }
-        return null; // Return null if account is not found
-    }
-
-    /*
-     * Returns the bank account with the specified account number.
-     * 
-     * @param AccountNum The account number of the account to be returned.
-     */
-    public ArrayList<String> createNewAccount() {
-        Scanner scanner = new Scanner(System.in);
-        ArrayList<String> newAccount = new ArrayList<>();
-
-        System.out.print("Enter First Name: ");
-        String Fname = scanner.nextLine();
-
-        System.out.print("Enter Last Name: ");
-        String Lname = scanner.nextLine();
-
-        System.out.print("Enter Email: ");
-        String email = scanner.nextLine();
-
-        System.out.print("Enter 4-digit PIN: ");
-        String pin = scanner.nextLine();
-
-        System.out.print("Enter Account Number: ");
-        String accountNumber = scanner.nextLine();
-
-        newAccount.add(accountNumber);
-        newAccount.add(Fname);
-        newAccount.add(Lname);
-        newAccount.add(email);
-        newAccount.add(pin);
-
-        return newAccount;
-    }
-    /*
-     * Creates a new credit account and adds it to the bank.
-     * 
-     * @return The newly created credit account.
-     */
 
     public CreditAccount createNewCreditAccount() {
-        ArrayList<String> newAccount = createNewAccount();
-        String accountNumber = newAccount.get(0);
-        String Fname = newAccount.get(1);
-        String Lname = newAccount.get(2);
-        String email = newAccount.get(3);
-        String pin = newAccount.get(4);
-
-        CreditAccount newCreditAccount = new CreditAccount(this, accountNumber, Fname, Lname, email, pin);
-        BANKACCOUNTS.add(newCreditAccount);
-        System.out.println("New Credit Account created successfully!");
-        return newCreditAccount;
+        return (CreditAccount) createNewAccount(CreditAccount.class);
     }
 
-    /*
-     * Creates a new savings account and adds it to the bank.
-     * 
-     * @return The newly created savings account.
-     */
     public SavingsAccount createNewSavingsAccount() {
-        ArrayList<String> newAccount = createNewAccount();
-        String accountNumber = newAccount.get(0);
-        String Fname = newAccount.get(1);
-        String Lname = newAccount.get(2);
-        String email = newAccount.get(3);
-        String pin = newAccount.get(4);
-        SavingsAccount newSavingsAccount = new SavingsAccount(this, accountNumber, Fname, Lname, email, pin, 0.0);
-        BANKACCOUNTS.add(newSavingsAccount);
-        System.out.println("New Savings Account created successfully!");
-        return newSavingsAccount;
+        return (SavingsAccount) createNewAccount(SavingsAccount.class);
     }
 
     public void addNewAccount(Account account) {
-        if (account != null) {
-            BANKACCOUNTS.add(account);
-            System.out.println("Account created successfully!");
+        if (bankAccounts.stream().noneMatch(a -> a.getAccountNumber().equals(account.getAccountNumber()))) {
+            bankAccounts.add(account);
+            System.out.println("Account registered successfully");
         } else {
-            System.out.println("Error: Cannot add null account.");
+            System.out.println("Account number already exists!");
         }
     }
 
-    /*
-     * Returns if the account with the specified account number exists in the bank.
-     * 
-     * @param AccountNum The account number of the account to be returned.
-     * 
-     * @param bank The bank to search for the account.
-     */
-    public static boolean accountExists(Bank bank, String accountNum) {
-        // Input validation
-        if ((bank == null) || (accountNum == null) || accountNum.isEmpty()) {
-            return false;
-        }
+    public static class BankCredentialsComparator implements Comparator<Bank> {
+        @Override
+        public int compare(Bank b1, Bank b2) {
+            BankComparator name = new BankComparator();
+            int compareName = name.compare(b1, b2);
 
-        // Check each account in the bank's accounts list
-        for (Account account : bank.BANKACCOUNTS) {
-            // Compare the account number with the provided account number
-            if (account.getACCOUNTNUMBER().equals(accountNum)) {
-                return true;
+            if (compareName != 0) {
+                return compareName;
             }
-        }
 
-        // Account not found
-        return false;
+            return Integer.compare(b1.getId(), b2.getId());
+        }
     }
 
-    /**
-     * Returns a string representation of the Bank object.
-     * 
-     * @return A string that represents this Bank object.
-     */
+    public static class BankIdComparator implements Comparator<Bank> {
+        @Override
+        public int compare(Bank b1, Bank b2) {
+            return Integer.compare(b1.getId(), b2.getId());
+        }
+    }
+
+    public static class BankComparator implements Comparator<Bank> {
+        @Override
+        public int compare(Bank b1, Bank b2) {
+            return b1.getName().compareTo(b2.getName());
+        }
+    }
+
     public String toString() {
-        String sb = "Bank [ID=" + getID() +
+        String sb = "Bank [ID=" + getId() +
                 ", name=" + getName() +
                 ", passcode= " + getPasscode() +
                 ", DEPOSITLIMIT=" + getDepositLimit() +
                 ", WITHDRAWLIMIT=" + getDepositLimit() +
                 ", CREDITLIMIT=" + getCreditLimit() +
                 ", processingFee=" + getProcessingFee() +
-                ", Number of accounts=" + BANKACCOUNTS.size() +
+                ", Number of accounts=" + bankAccounts.size() +
                 "]";
 
         return sb;
     }
-
-    public static class BankComparator implements Comparator<Bank> {
-        @Override
-        public int compare(Bank b1, Bank b2) {
-            // First compare IDs
-            int idComparison = Integer.compare(b1.getID(), b2.getID());
-            if (idComparison != 0) return idComparison;
-
-            // Then compare names
-            int nameComparison = b1.getName().compareTo(b2.getName());
-            if (nameComparison != 0) return nameComparison;
-
-            // Finally compare passcodes
-            return b1.getPasscode().compareTo(b2.getPasscode());
-        }
-    }
-
-    public static class BankIdComparator implements Comparator<Bank>{
-        @Override
-        public int compare(Bank b1, Bank b2){
-            return  Integer.compare(b1.getID(), b2.getID());
-        }
-    }
-
-    public static class BankCredentialsComparator implements Comparator<Bank> {
-        @Override
-
-        public int compare(Bank b1, Bank b2){
-            int nameComparison = b1.getName().compareTo(b2.getName());
-            if (nameComparison != 0) return nameComparison;
-
-            return b1.getPasscode().compareTo(b2.getPasscode());
-        }
-    }
-
 }
