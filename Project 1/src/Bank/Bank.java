@@ -3,6 +3,7 @@ package Bank;
 import Accounts.Account;
 import Accounts.CreditAccount;
 import Accounts.SavingsAccount;
+import Accounts.Transaction;
 import Main.Field;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -92,6 +93,12 @@ public class Bank {
             Field<Double, Double> balance = new Field<Double, Double>("Initial Deposit", Double.class, 0.0, new Field.DoubleFieldValidator());
             balance.setFieldValue("Enter Initial Deposit: ");
             account = new SavingsAccount(this, accountNumber.getFieldValue(), pin.getFieldValue(), fname.getFieldValue(), lname.getFieldValue(), email.getFieldValue(), balance.getFieldValue());
+            // Log the initial deposit transaction
+            account.addNewTransaction(
+                    account.getAccountNumber(),
+                    Transaction.Transactions.Deposit,
+                    "Initial Deposit: +" + balance
+            );
         } else {
             account = new CreditAccount(this, accountNumber.getFieldValue(), pin.getFieldValue(), fname.getFieldValue(), lname.getFieldValue(), email.getFieldValue());
         }

@@ -45,6 +45,11 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
         if (hasEnoughBalance(amount)) {
             balance -= amount;
             System.out.println("Withdrawal successful. New balance: " + balance);
+//            this.addNewTransaction(
+//                    this.accountNumber,
+//                    Transaction.Transactions.Withdraw,
+//                    "Withdrew: -" + amount
+//            );
             return true;
         } else {
             insufficientBalance();
@@ -58,10 +63,17 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
         if (amount > 0) {
             this.balance += amount;
             System.out.println("Deposit successful. New balance: " + balance);
+//            this.addNewTransaction(
+//                    this.accountNumber,
+//                    Transaction.Transactions.Deposit,
+//                    "Deposit: +"+ amount
+//            );
             return true;
         } else {
-            System.out.println("Invalid deposit amount.");
+//            System.out.println("Invalid deposit amount.");
+            insufficientBalance();
             return false;
+
         }
     }
 
@@ -69,27 +81,34 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
     @Override
     public boolean transfer(Account account, double amount) throws IllegalAccountType {
         if (!(account instanceof Deposit)) {//changed the code here
+//            this.addNewTransaction(
+//                    this.accountNumber,
+//                    Transaction.Transactions.FundTransfer,
+//                    "Failed Transfer: Invalid Account Type"
+//            );
             throw new IllegalAccountType("Invalid account type for transfer.");
         }
 
         if (!hasEnoughBalance(amount)) {
             insufficientBalance();
+            this.addNewTransaction(
+                    this.accountNumber,
+                    Transaction.Transactions.FundTransfer,
+                    "Failed Transfer: Insufficient Balance"
+            );
             return false;
         }
 
         this.withdrawal(amount);
-//        if (account instanceof SavingsAccount) {
-//            ((SavingsAccount) account).cashDeposit(amount);
-//        }
         ((Deposit) account).cashDeposit(amount);
         System.out.println("Transfer successful. New balance: " + balance);
 
-        //record the transfer
 //        this.addNewTransaction(
-//                account.getACCOUNTNUMBER(),
+//                this.accountNumber,
 //                Transaction.Transactions.FundTransfer,
-//                "Transfered $" + amount + "to" + account.getACCOUNTNUMBER()
+//                "Transferred: -" + amount
 //        );
+
         return true;
     }
 
@@ -100,8 +119,19 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
             System.out.println("Invalid bank or account details.");
             return false;
         }
+        boolean success = transfer(account, amount);
 
-        return transfer(account, amount);
+        if(success){
+            double fee = this.getBank().getProcessingFee();
+            this.balance -= fee;
+            System.out.println("Processing fee of " + fee + " deducted. New balance: " + balance);
+            addNewTransaction(
+                    this.accountNumber,
+                    Transaction.Transactions.FundTransfer,
+                    "Transferred: " + this.balance
+            );
+        }
+        return success;
     }
 
     // toString method
