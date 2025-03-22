@@ -1,3 +1,5 @@
+package Tests;
+
 import Accounts.CreditAccount;
 import Accounts.IllegalAccountType;
 import Accounts.SavingsAccount;
