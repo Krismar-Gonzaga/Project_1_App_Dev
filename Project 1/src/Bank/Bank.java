@@ -8,6 +8,9 @@ import Main.Field;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * Represents a bank with multiple accounts, deposit limits, and processing fees.
+ */
 public class Bank {
     private String bankName, passcode;
     private final int iD;
@@ -15,6 +18,7 @@ public class Bank {
     private final double depositLimit, withdrawLimit, creditLimit;
     private double processingFee;
 
+    // Getter methods for various bank attributes
     public ArrayList<Account> getBankAccounts() {
         return new ArrayList<>(bankAccounts);
     }
@@ -46,10 +50,16 @@ public class Bank {
         return processingFee;
     }
 
+    /**
+     * Constructs a Bank object with default limits.
+     */
     public Bank(int iD, String bankName, String passcode) {
         this(iD, bankName, passcode, 50000.0, 50000.0, 100000.0, 10.0);
     }
 
+    /**
+     * Constructs a Bank object with specified limits and processing fee.
+     */
     public Bank(int iD, String bankName, String passcode, double depositLimit, double withdrawLimit, double creditLimit, double processingFee) {
         this.iD = iD;
         this.bankName = bankName;
@@ -60,6 +70,9 @@ public class Bank {
         this.processingFee = processingFee;
     }
 
+    /**
+     * Displays all accounts of a specified type.
+     */
     public void showAccounts(Class<? extends Account> accountType) {
         for (Account account : bankAccounts) {
             if (accountType == null || accountType.isInstance(account)) {
@@ -68,10 +81,16 @@ public class Bank {
         }
     }
 
+    /**
+     * Retrieves a bank account based on the account number.
+     */
     public Account getBankAccount(String accountNum) {
         return bankAccounts.stream().filter(acc -> acc.getAccountNumber().equals(accountNum)).findFirst().orElse(null);
     }
 
+    /**
+     * Creates a new account of the specified type.
+     */
     private Account createNewAccount(Class<? extends Account> accountType) {
         Field<String, Integer> accountNumber = new Field<String, Integer>("Account Number", String.class, 5, new Field.StringFieldLengthValidator());
         accountNumber.setFieldValue("Enter Account Number: ");
@@ -106,14 +125,23 @@ public class Bank {
         return account;
     }
 
+    /**
+     * Creates a new credit account.
+     */
     public CreditAccount createNewCreditAccount() {
         return (CreditAccount) createNewAccount(CreditAccount.class);
     }
 
+    /**
+     * Creates a new savings account.
+     */
     public SavingsAccount createNewSavingsAccount() {
         return (SavingsAccount) createNewAccount(SavingsAccount.class);
     }
 
+    /**
+     * Adds a new account to the bank if the account number is unique.
+     */
     public void addNewAccount(Account account) {
         if (bankAccounts.stream().noneMatch(a -> a.getAccountNumber().equals(account.getAccountNumber()))) {
             bankAccounts.add(account);
@@ -123,6 +151,7 @@ public class Bank {
         }
     }
 
+    // Comparator classes for sorting banks
     public static class BankCredentialsComparator implements Comparator<Bank> {
         @Override
         public int compare(Bank b1, Bank b2) {
@@ -151,6 +180,9 @@ public class Bank {
         }
     }
 
+    /**
+     * Returns a string representation of the bank.
+     */
     public String toString() {
         String sb = "Bank [ID=" + getId() +
                 ", name=" + getName() +
