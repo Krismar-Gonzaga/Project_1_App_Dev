@@ -166,12 +166,9 @@ public class BankLauncher {
             return;
         }
 
-//        System.out.println("Do you want to set custom deposit, withdrawal, and credit limits? (Y/N): ");
-//        String choice = Main.prompt("", true).trim().toUpperCase();
-//
+
         Bank newBank;
-//
-//        if (choice.equals("Y")) {
+
             Field<Double, Double> depositLimit = new Field<Double, Double>("Deposit Limit", Double.class, 0.0, new Field.DoubleFieldValidator());
             depositLimit.setFieldValue("Enter Deposit Limit: ");
             double depositLimitInput = depositLimit.getFieldValue();
@@ -189,9 +186,7 @@ public class BankLauncher {
             double processingFeeInput = processingFee.getFieldValue();
 
             newBank = new Bank(bankSize(), bankName, bankPasscode, depositLimitInput, withdrawLimitInput, creditLimitInput, processingFeeInput);
-//        } else {
-//            newBank = new Bank(bankSize(), bankName, bankPasscode);
-//        }
+
 
         addBank(newBank);
         System.out.println("Bank Created: " + newBank.getName());
