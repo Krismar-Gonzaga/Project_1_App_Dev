@@ -43,7 +43,7 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
         }
 
         if (hasEnoughBalance(amount)) {
-            balance -= amount;
+            adjustAccountBalance(amount);
             System.out.println("Withdrawal successful. New balance: " + balance);
 //            this.addNewTransaction(
 //                    this.accountNumber,
@@ -61,6 +61,10 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
     @Override
     public boolean cashDeposit(double amount) {
         if (amount > 0) {
+            if (amount > this.getBank().getDepositLimit()){
+                System.out.println("Deposit Failed: Amount exceeds bank limit.");
+                return false;
+            }
             this.balance += amount;
             System.out.println("Deposit successful. New balance: " + balance);
 //            this.addNewTransaction(
@@ -70,7 +74,6 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
 //            );
             return true;
         } else {
-//            System.out.println("Invalid deposit amount.");
             insufficientBalance();
             return false;
 
@@ -81,11 +84,6 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
     @Override
     public boolean transfer(Account account, double amount) throws IllegalAccountType {
         if (!(account instanceof Deposit)) {//changed the code here
-//            this.addNewTransaction(
-//                    this.accountNumber,
-//                    Transaction.Transactions.FundTransfer,
-//                    "Failed Transfer: Invalid Account Type"
-//            );
             throw new IllegalAccountType("Invalid account type for transfer.");
         }
 
@@ -123,7 +121,7 @@ public class SavingsAccount extends Account implements Withdrawal, Deposit, Fund
 
         if(success){
             double fee = this.getBank().getProcessingFee();
-            this.balance -= fee;
+            adjustAccountBalance(fee);
             System.out.println("Processing fee of " + fee + " deducted. New balance: " + balance);
             addNewTransaction(
                     this.accountNumber,

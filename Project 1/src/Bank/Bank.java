@@ -97,7 +97,7 @@ public class Bank {
             account.addNewTransaction(
                     account.getAccountNumber(),
                     Transaction.Transactions.Deposit,
-                    "Initial Deposit: +" + balance
+                    "Initial Deposit: +" + balance.getFieldValue()
             );
         } else {
             account = new CreditAccount(this, accountNumber.getFieldValue(), pin.getFieldValue(), fname.getFieldValue(), lname.getFieldValue(), email.getFieldValue());
